@@ -1,4 +1,9 @@
 package com.kowal.photographer.repositorys;
 
-public class GaleryRepository {
+import com.kowal.photographer.entitys.Galery;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface GaleryRepository extends JpaRepository<Galery,Long> {
 }
