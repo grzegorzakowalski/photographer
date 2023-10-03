@@ -25,7 +25,7 @@
                 Galeria
             </a>
 
-            <a class="navbar-item has-text-light">
+            <a class="navbar-item has-text-light" href="${pageContext.request.contextPath}/timetable?shift=0">
                 Terminarz
             </a>
 
@@ -52,11 +52,11 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-primary">
-                        <strong>Sign up</strong>
+                    <a class="button is-primary" href="${pageContext.request.contextPath}/registry">
+                        <strong>Zarejestruj się</strong>
                     </a>
-                    <a class="button is-light">
-                        Log in
+                    <a class="button is-light" href="${pageContext.request.contextPath}/login">
+                        Zaloguj się
                     </a>
                 </div>
             </div>

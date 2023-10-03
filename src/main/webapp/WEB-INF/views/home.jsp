@@ -19,7 +19,7 @@
                 <img src="home-page-photo.jpg">
             </div>
             <div class="tile is-child box">
-                <p class="title">Two</p>
+                <p class="title">${number}</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
             </div>
         </div>
