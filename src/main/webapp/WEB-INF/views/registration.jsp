@@ -9,10 +9,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html style="background-color: #F5F5F5">
-<c:import url="header.jsp"></c:import>
+<c:import url="header.jsp"/>
 <body>
 
-<c:import url="nav-bar.jsp"></c:import>
+<c:import url="nav-bar.jsp"/>
 
 <div class="container" style="width: 30%">
     <br>
@@ -21,28 +21,28 @@
     <div class="field">
         <label class="label">Email</label>
         <div class="control">
-            <form:input path="username" cssClass="input" placeholder="Jan.Kowalski@example.pl"></form:input>
+            <form:input path="username" cssClass="input" placeholder="Jan.Kowalski@example.pl"/>
         </div>
         <p class="help">On będzie także loginem</p>
     </div>
     <div class="field">
         <label class="label">Hasło</label>
         <div class="control">
-            <form:password path="password" cssClass="input"></form:password>
+            <form:password path="password" cssClass="input"/>
         </div>
         <p class="help">Pole wymagane</p>
     </div>
     <div class="field">
         <label class="label">Numer telefonu</label>
         <div class="control">
-            <form:input path="phoneNumber" cssClass="input" placeholder="123456789"></form:input>
+            <form:input path="phoneNumber" cssClass="input" placeholder="123456789"/>
         </div>
         <p class="help">Pole wymagane</p>
     </div>
     <div class="field">
         <label class="label">Imię</label>
         <div class="control">
-            <form:input path="firstName" cssClass="input" placeholder="Jan"></form:input>
+            <form:input path="firstName" cssClass="input" placeholder="Jan"/>
         </div>
     </div>
     <div class="field is-grouped is-grouped-right">

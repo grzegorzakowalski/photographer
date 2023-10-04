@@ -32,17 +32,19 @@
         </tr>
         </thead>
         <tbody>
-        <c:if test="${firstDayOfMonth == 7 && lastDayOfMonth >= 30 || firstDayOfMonth == 6 && lastDayOfMonth == 31}">
-            <c:forEach begin="0" end="5" varStatus="i">
+            <c:forEach begin="0" end="${weeks - 1}" varStatus="i"> <%-- TODO napraw to wyświetlanie!! --%>
             <tr>
                 <c:forEach begin="0" end="6" varStatus="j">
                     <c:set var="actualDayOfMonth" value="${((i.index) * 7) + (j.index + 1) - firstDayOfMonth + 1}"/>
                     <td>
                         <c:if test="${actualDayOfMonth > 0 && actualDayOfMonth <= lastDayOfMonth}">
-<%--                            ${dayOfMonth}.<c:if test="${dayOfMonth < 10}">&nbsp;&nbsp;</c:if>--%>
                             <c:choose>
                                 <c:when test="${!allUnavailable.get(actualDayOfMonth - 1)}">
-                                    <p class="help is-success" style="font-size: 1.25rem"><strong class="">${actualDayOfMonth}.<c:if test="${actualDayOfMonth < 10}">&nbsp;&nbsp;</c:if></strong> Zabukuj termin</p>
+                                    <p class="help is-success" style="font-size: 1.25rem"><strong class="">${actualDayOfMonth}.<c:if test="${actualDayOfMonth < 10}">&nbsp;&nbsp;</c:if></strong> <a href="/timetable/add?day=${actualDayOfMonth}&month=${month}&year=${year}">Zabukuj termin</a>
+                                    <span class="icon">
+                                        <i class="fas fa-calendar-check"></i>
+                                    </span>
+                                    </p>
                                 </c:when>
                                 <c:otherwise>
                                     <p class="help is-danger" style="font-size: 1.25rem"><strong class="">${actualDayOfMonth}.<c:if test="${actualDayOfMonth < 10}">&nbsp;&nbsp;</c:if></strong> Brak wolnych terminów</p>
@@ -53,43 +55,15 @@
                     </td>
                 </c:forEach>
             </tr>
+
             </c:forEach>
-        </c:if>
-        <c:if test="${firstDayOfMonth < 6 }">
-            <c:forEach begin="0" end="4" varStatus="i">
-                <tr>
-                    <c:forEach begin="0" end="6" varStatus="j">
-                        <c:set var="actualDayOfMonth" value="${((i.index) * 7) + (j.index + 1) - firstDayOfMonth + 1}"/>
-                        <td>
-                                <%--                        ${((i.index) * 7) + (j.index +1)}--%>
-                            <c:if test="${actualDayOfMonth > 0 && actualDayOfMonth <= lastDayOfMonth }">
-<%--                                ${dayOfMonth}.<c:if test="${dayOfMonth < 10}">&nbsp;&nbsp;</c:if>--%>
-                                <c:choose>
-                                    <c:when test="${!allUnavailable.get(actualDayOfMonth - 1)}">
-                                        <p class="help is-success" style="font-size: 1.25rem"><strong class="">${actualDayOfMonth}.<c:if test="${actualDayOfMonth < 10}">&nbsp;&nbsp;</c:if></strong> Zabukuj termin</p>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <p class="help is-danger" style="font-size: 1.25rem"><strong class="">${actualDayOfMonth}.<c:if test="${actualDayOfMonth < 10}">&nbsp;&nbsp;</c:if></strong> Brak wolnych terminów</p>
-                                    </c:otherwise>
-                                </c:choose>
-
-                            </c:if>
-                        </td>
-
-                    </c:forEach>
-                </tr>
-            </c:forEach>
-        </c:if>
-
-
         </tbody>
-
     </table>
     <form method="get">
         <div class="field is-grouped is-grouped-right">
             <p class="control">
-                <button name="shift" value="${shift - 1}" type="submit" class="button is-primary">Poprzedni miesiąc</button>
-                <button name="shift" value="${shift + 1}" type="submit" class="button is-primary is-right">Następny miesiąc</button>
+                <button name="shift" value="${shift - 1}" type="submit" class="button is-link">Poprzedni miesiąc</button>
+                <button name="shift" value="${shift + 1}" type="submit" class="button is-link">Następny miesiąc</button>
             </p>
         </div>
     </form>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: kowal
@@ -52,12 +53,14 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
+                    <sec:authorize access="isAnonymous()">
                     <a class="button is-primary" href="${pageContext.request.contextPath}/registry">
                         <strong>Zarejestruj się</strong>
                     </a>
                     <a class="button is-light" href="${pageContext.request.contextPath}/login">
                         Zaloguj się
                     </a>
+                    </sec:authorize>
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@
 <div class="container" style="width: 30%">
     <br>
     <br>
-<form method="post">
+<form method="post" action="${pageContext.request.contextPath}/login">
     <div class="field">
         <label class="label">Email</label>
         <div class="control">
