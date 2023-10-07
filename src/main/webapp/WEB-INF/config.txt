@@ -1,3 +1,0 @@
-and-now:5;
-max-per-day:6;
-for-test:1;

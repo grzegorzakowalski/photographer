@@ -6,9 +6,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
-
+@Service
 public class AuthService implements UserDetailsService {
     private final UserRepository userRepository;
 
@@ -23,7 +24,7 @@ public class AuthService implements UserDetailsService {
             throw new UsernameNotFoundException("Nie istnieje użytkownik o loginie:" + username);
         }
         return new  org.springframework.security.core.userdetails.User(user.getUsername(),
-                user.getPassword(),
+                user.getPassword(), user.getActive(), true, true, true,
                 Set.of(new SimpleGrantedAuthority(user.getRole())));
     }
 

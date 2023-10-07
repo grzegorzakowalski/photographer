@@ -8,13 +8,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html style="background-color: #F5F5F5">
-<c:import url="header.jsp"></c:import>
+<c:import url="header.jsp"/>
 <body>
 
-<c:import url="nav-bar.jsp"></c:import>
+<c:import url="nav-bar.jsp"/>
 <div class="container" style="width: 30%">
     <br>
     <br>
+    ${SPRING_SECURITY_LAST_EXCEPTION}
 <form method="post" action="${pageContext.request.contextPath}/login">
     <div class="field">
         <label class="label">Email</label>
@@ -31,7 +32,7 @@
     </div>
     <div class="field is-grouped-right">
         <div class="control">
-            <button class="button is-link">Submit</button>
+            <button class="button is-link" type="submit">Submit</button>
         </div>
     </div>
 </form>

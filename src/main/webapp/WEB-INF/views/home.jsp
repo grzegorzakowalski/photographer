@@ -8,10 +8,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html style="background-color: #F5F5F5">
-<c:import url="header.jsp"></c:import>
+<c:import url="header.jsp"/>
 <body>
 
-<c:import url="nav-bar.jsp"></c:import>
+<c:import url="nav-bar.jsp"/>
     <br>
     <div class="tile is-ancestor">
         <div class="tile is-parent is-vertical">
@@ -19,7 +19,7 @@
                 <img src="home-page-photo.jpg">
             </div>
             <div class="tile is-child box">
-                <p class="title">${number}</p>
+                <p class="title">${user}</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
             </div>
         </div>

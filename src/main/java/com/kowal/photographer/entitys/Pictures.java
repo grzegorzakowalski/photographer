@@ -11,5 +11,5 @@ public class Pictures {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String link;
-
+    private String description;
 }

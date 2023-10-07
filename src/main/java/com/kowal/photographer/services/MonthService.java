@@ -1,9 +1,10 @@
 package com.kowal.photographer.services;
 
 
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.time.Month;
-
 public class MonthService {
     private final LocalDate localDate;
 

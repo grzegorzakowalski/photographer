@@ -61,6 +61,14 @@
                         Zaloguj się
                     </a>
                     </sec:authorize>
+                    <sec:authorize access="isAuthenticated()">
+                        <a class="button is-primary" href="${pageContext.request.contextPath}/panel">
+                            <strong>Twój panel</strong>
+                        </a>
+                        <a class="button is-light" href="${pageContext.request.contextPath}/logout">
+                            Wyloguj się
+                        </a>
+                    </sec:authorize>
                 </div>
             </div>
         </div>

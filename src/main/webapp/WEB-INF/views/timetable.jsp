@@ -14,7 +14,7 @@
 
 <div class="container-fluid">
     <section class="section">
-        <h1 class="title">${monthName}</h1>
+        <h1 class="title">${myMonth.name} ${year}</h1>
         <h2 class="subtitle">
             Jeżeli w polu jest tekst na czerwono, oznacza to, że tego dnia już wolnych terminów.
         </h2>
@@ -32,7 +32,7 @@
         </tr>
         </thead>
         <tbody>
-            <c:forEach begin="0" end="${weeks - 1}" varStatus="i"> <%-- TODO napraw to wyświetlanie!! --%>
+            <c:forEach items="${myMonth.listOfWeeks}" varStatus="i"> <%-- TODO napraw to wyświetlanie!! --%>
             <tr>
                 <c:forEach begin="0" end="6" varStatus="j">
                     <c:set var="actualDayOfMonth" value="${((i.index) * 7) + (j.index + 1) - firstDayOfMonth + 1}"/>

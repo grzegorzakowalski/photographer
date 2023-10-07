@@ -20,17 +20,19 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception{
         return http.authorizeHttpRequests()
+                .antMatchers("/panel").hasAnyRole("USER","ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .csrf().disable()
                 .formLogin()
                 .loginPage("/login")
-                .successForwardUrl("/")
+                .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
+                .and().exceptionHandling().accessDeniedPage("/login")
                 .and()
                 .build();
     }
