@@ -36,7 +36,7 @@
                 </a>
 
                 <div class="navbar-dropdown">
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="${pageContext.request.contextPath}/contact">
                         Kontakt
                     </a>
                     <a class="navbar-item">

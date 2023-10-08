@@ -21,7 +21,7 @@ public class PanelController {
     @GetMapping
     public String getPanelView(@AuthenticationPrincipal UserDetails userDetails,
                                Model model){
-        model.addAttribute("user", userRepository.findUserByUsername(userDetails.getUsername()));
+        model.addAttribute("user", userRepository.getWithPicturesByUsername(userDetails.getUsername()));
         return "panel";
     }
 }

@@ -13,19 +13,27 @@
 <body>
 <c:import url="nav-bar.jsp"/>
 <div class="container is-fluid">
-    <section class="section">
+    <section class="section is-large">
         <h1 class="title">Witaj ${user.firstName}!</h1>
         <h2 class="subtitle">
             Oto panel do kontrolowania twojego konta.
         </h2>
     </section>
-    <c:if test="${user.pictures != null}">
+    <c:if test="${user.pictures.size() > 0}">
         <section class="section">
             <h1 class="title">Oto lista twoich zdjęć</h1>
             <h2 class="subtitle">
                 <c:forEach items="${user.pictures}" var="pic">
-                        <a href="${pic.link}">${pic.description}</a>
+                        <a href="http://${pic.link}">${pic.description}</a><br>
                 </c:forEach>
+            </h2>
+        </section>
+    </c:if>
+    <c:if test="${user.pictures.size() == 0}">
+        <section class="section">
+            <h1 class="title">Nie masz na razie żadnych zdjęć</h1>
+            <h2 class="subtitle">
+                Ale zawsze możemy to zmienić! <a href="${pageContext.request.contextPath}/timetable">Tutaj</a>, albo poprzez <a href="${pageContext.request.contextPath}/contact">kontakt</a>.
             </h2>
         </section>
     </c:if>
