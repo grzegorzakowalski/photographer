@@ -23,21 +23,34 @@
         <div class="control">
             <form:input path="username" cssClass="input" placeholder="Jan.Kowalski@example.pl"/>
         </div>
-        <p class="help">On będzie także loginem</p>
+        <c:forEach items="${validated}" var="v">
+            <c:if test="${v.propertyPath == 'username'}">
+                <p class="help is-danger">Podaj poprawny adres email</p>
+            </c:if>
+        </c:forEach>
+
     </div>
     <div class="field">
         <label class="label">Hasło</label>
         <div class="control">
             <form:password path="password" cssClass="input"/>
         </div>
-        <p class="help">Pole wymagane</p>
+        <c:forEach items="${validated}" var="v">
+            <c:if test="${v.propertyPath == 'password'}">
+                <p class="help is-danger">Pole wymagane</p>
+            </c:if>
+        </c:forEach>
     </div>
     <div class="field">
         <label class="label">Numer telefonu</label>
         <div class="control">
             <form:input path="phoneNumber" cssClass="input" placeholder="123456789"/>
         </div>
-        <p class="help">Pole wymagane</p>
+        <c:forEach items="${validated}" var="v">
+            <c:if test="${v.propertyPath == 'phoneNumber'}">
+                <p class="help is-danger">Pole wymagane</p>
+            </c:if>
+        </c:forEach>
     </div>
     <div class="field">
         <label class="label">Imię</label>
@@ -53,7 +66,6 @@
         </p>
     </div>
 </form:form>
-
 </div>
 </body>
 </html>

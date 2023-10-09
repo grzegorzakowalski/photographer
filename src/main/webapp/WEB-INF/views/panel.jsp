@@ -21,7 +21,7 @@
     </section>
     <c:if test="${user.pictures.size() > 0}">
         <section class="section">
-            <h1 class="title">Oto lista twoich zdjęć</h1>
+            <h1 class="title">Oto lista twoich sesji:</h1>
             <h2 class="subtitle">
                 <c:forEach items="${user.pictures}" var="pic">
                         <a href="http://${pic.link}">${pic.description}</a><br>
@@ -37,6 +37,16 @@
             </h2>
         </section>
     </c:if>
+    <sec:authorize access="hasRole('ADMIN')">
+        <section class="section">
+            <h1 class="title">Lista oczekujących terminów do zatwierdzenia:</h1>
+            <h2 class="subtitle">
+                <c:forEach items="${notConfirmedTimetable}" var="entry">
+                        <a href="${pageContext.request.contextPath}/timetable/confirm?id=${entry.id}">${entry.date}: ${entry.description}</a>
+                </c:forEach>
+            </h2>
+        </section>
+    </sec:authorize>
 </div>
 
 </body>

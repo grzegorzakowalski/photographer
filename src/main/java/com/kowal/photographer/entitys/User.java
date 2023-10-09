@@ -3,6 +3,7 @@ package com.kowal.photographer.entitys;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class User {
     private Long id;
     @Column(nullable = false, unique = true)
     @NotBlank
+    @Email
     private String username;// email!
     @Column(nullable = false)
     @NotBlank

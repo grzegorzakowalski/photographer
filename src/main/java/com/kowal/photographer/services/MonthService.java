@@ -27,15 +27,6 @@ public class MonthService {
         return localDate.withDayOfMonth(1);
     }
 
-    public Integer getAmountOfWeeks(){
-        LocalDate startDate = localDate.withDayOfMonth( getFirstDayAsNumberOfWeekDay());
-        LocalDate endDate = startDate.plusMonths(1).withDayOfMonth(1);
-        int weeks = 1;
-        while (startDate.isBefore(endDate)){ //  || startDate.equals(endDate)
-            weeks++;
-            startDate = startDate.plusWeeks(1);
-        }
-        return weeks;
-    }
+
 
 }

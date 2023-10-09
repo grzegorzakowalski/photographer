@@ -10,4 +10,5 @@ import java.util.List;
 public interface TimetableRepository extends JpaRepository<Timetable,Long> {
 
     List<Timetable> findAllByDate(LocalDate date);
+    List<Timetable> findAllByConfirmed(boolean isConfirmed);
 }
