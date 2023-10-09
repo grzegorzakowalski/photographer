@@ -6,9 +6,11 @@ import com.kowal.photographer.entitys.User;
 import com.kowal.photographer.repositorys.ConfigRepository;
 import com.kowal.photographer.repositorys.TimetableRepository;
 import com.kowal.photographer.repositorys.UserRepository;
+import com.kowal.photographer.security.CurrentUser;
 import com.kowal.photographer.services.MonthService;
 import com.kowal.photographer.services.TimetableService;
 import com.kowal.photographer.services.UserService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,10 +58,13 @@ public class TimetableController {
 
     @GetMapping("/add")
     public String timetableAddView(Model model,
-                                   @RequestParam(name = "day") Integer day,
-                                   @RequestParam(name = "month") Integer month,
-                                   @RequestParam(name = "year") Integer year){
+                                   @RequestParam(name = "day", defaultValue = "1") Integer day,
+                                   @RequestParam(name = "month", defaultValue = "1") Integer month,
+                                   @RequestParam(name = "year", defaultValue = "2023") Integer year,
+                                   @AuthenticationPrincipal CurrentUser currentUser){
         model.addAttribute("dateTime", LocalDate.of(year,month,day));
+        model.addAttribute("timetable", new Timetable());
+        model.addAttribute("user",currentUser != null ? currentUser.getUser() : userService.getTempUser());
         return "timetable-add";
     }
 
