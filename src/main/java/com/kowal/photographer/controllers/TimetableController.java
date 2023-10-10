@@ -19,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/timetable")
@@ -30,13 +33,15 @@ public class TimetableController {
     private final UserRepository userRepository;
     private final ConfigRepository configRepository;
     private final TimetableRepository timetableRepository;
+    private final Validator validator;
 
-    public TimetableController(TimetableService timetableService, UserService userService, UserRepository userRepository, ConfigRepository configRepository, TimetableRepository timetableRepository) {
+    public TimetableController(TimetableService timetableService, UserService userService, UserRepository userRepository, ConfigRepository configRepository, TimetableRepository timetableRepository, Validator validator) {
         this.timetableService = timetableService;
         this.userService = userService;
         this.userRepository = userRepository;
         this.configRepository = configRepository;
         this.timetableRepository = timetableRepository;
+        this.validator = validator;
     }
 
     @GetMapping
@@ -62,18 +67,26 @@ public class TimetableController {
                                    @RequestParam(name = "month", defaultValue = "1") Integer month,
                                    @RequestParam(name = "year", defaultValue = "2023") Integer year,
                                    @AuthenticationPrincipal CurrentUser currentUser){
-        model.addAttribute("dateTime", LocalDate.of(year,month,day));
-        model.addAttribute("timetable", new Timetable());
-        model.addAttribute("user",currentUser != null ? currentUser.getUser() : userService.getTempUser());
+        Timetable timetable = new Timetable();
+        timetable.setOwner( currentUser != null ? currentUser.getUser() : userService.getTempUser());
+        timetable.setDate( LocalDate.of(year, month, day));
+        model.addAttribute("date", timetable.getDate());
+        model.addAttribute("timetable", timetable);
         return "timetable-add";
     }
 
     @PostMapping("/add")
-    public String timetableAdd(Timetable timetable, User user){
-        //ToDO obsłuż to głupi chuju
-        // TODO tutaj dodaj konto jeżeli zalogowany jeśli nie utwórz tempa
+    public String timetableAdd(Timetable timetable, Model model){
+        Set<ConstraintViolation<Timetable>> validated = validator.validate(timetable);
+        if( !validated.isEmpty()){
+            model.addAttribute("validated", validated);
+            model.addAttribute("timetable", timetable);
+            return "timetable-add";
+        }
+        timetable.setConfirmed(false);
 
-        return "redirect:/panel";
+        timetableService.add(timetable, configRepository.getMaxPerDay());// zwraca czy dodano czy nie
+        return "redirect:/"; // TODO dodaj obsługę potwierdzenia
     }
 
     @GetMapping("/confirm")

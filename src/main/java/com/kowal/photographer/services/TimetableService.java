@@ -1,8 +1,8 @@
 package com.kowal.photographer.services;
 
 import com.kowal.photographer.entitys.Timetable;
-import com.kowal.photographer.repositorys.ConfigRepository;
 import com.kowal.photographer.repositorys.TimetableRepository;
+import com.kowal.photographer.repositorys.UserRepository;
 import com.sun.istack.NotNull;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,11 @@ import java.util.List;
 @Service
 public class TimetableService {
     private final TimetableRepository timetableRepository;
+    private final UserRepository userRepository;
 
-    public TimetableService(TimetableRepository timetableRepository) {
+    public TimetableService(TimetableRepository timetableRepository, UserRepository userRepository) {
         this.timetableRepository = timetableRepository;
+        this.userRepository = userRepository;
     }
     @NotNull
     public Boolean add(Timetable entity, Integer size){
@@ -26,9 +28,14 @@ public class TimetableService {
         if( entity.getId() != null){
             return false;
         }
+        if( !entity.getOwner().getActive()){
+            userRepository.save(entity.getOwner());
+        }
         timetableRepository.save(entity);
         return true;
     }
+
+
     @NotNull
     public Boolean update(Timetable entity){
         if( timetableRepository.exists(Example.of(entity))){

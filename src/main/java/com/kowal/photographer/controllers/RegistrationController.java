@@ -37,9 +37,6 @@ public class RegistrationController {
     public String processRegistration(User user, Model model){
         user.setActive(true);
         user.setRole("ROLE_USER");
-        if( user.getFirstName() == null){
-            user.setFirstName("Anon");
-        }
         Set<ConstraintViolation<User>> validated = validator.validate(user);
         if( !validated.isEmpty()){
             model.addAttribute("validated", validated);

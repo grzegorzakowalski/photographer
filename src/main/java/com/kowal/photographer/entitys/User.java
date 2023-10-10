@@ -32,7 +32,7 @@ public class User {
     @Column(name = "first_name")
     private String firstName;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Pictures> pictures = new ArrayList<>();
 
 }

@@ -23,7 +23,7 @@ public class AuthService implements UserDetailsService {
         if( user == null){
             throw new UsernameNotFoundException("Nie istnieje użytkownik o loginie:" + username);
         }
-        return new CurrentUser(user.getUsername(), user.getPassword(), Set.of(new SimpleGrantedAuthority(user.getRole())), user);
+        return new CurrentUser(user.getUsername(), user.getPassword(), Set.of(new SimpleGrantedAuthority(user.getRole())), userRepository, user);
     }
 
 

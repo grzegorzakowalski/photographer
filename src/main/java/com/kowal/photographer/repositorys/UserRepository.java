@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
+    @EntityGraph( type = EntityGraph.EntityGraphType.LOAD, attributePaths = {"pictures"})
     User findUserByUsername(String username);
     @Query("SELECT MAX(u.id) FROM User u")
     Long findMaxId();

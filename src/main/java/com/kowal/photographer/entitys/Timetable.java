@@ -1,8 +1,11 @@
 package com.kowal.photographer.entitys;
 
 import lombok.Data;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Entity
@@ -13,9 +16,12 @@ public class Timetable {
     private Long id;
     private LocalDate date;
     @ManyToOne
+    @Valid
     private User owner;
     private Boolean confirmed;
+    @NotBlank
     private String hour;
+    @NotBlank
     private String description;
 
 }
