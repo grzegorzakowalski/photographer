@@ -17,13 +17,6 @@
 <div class="container is-fluid">
     <br>
     <br>
-<c:forEach items="${validated}" var="v">
-    ${v.propertyPath}<br>
-</c:forEach>
-    test/\
-    <br>${timetable}
-    <br>
-    <br>
 <form:form modelAttribute="timetable" method="post">
     <section class="section">
         <h1 class="title">Witaj, jeżeli chcesz zabukować termin, wypełnij poniższy formularz. Pamiętaj, że wszystkie pola są wymagane. Również, jeżeli chcesz mieć dostęp do swoich zdjęć na stronie, polecam założyć konto najpierw :)</h1>

@@ -15,7 +15,6 @@
 <div class="container" style="width: 30%">
     <br>
     <br>
-    ${SPRING_SECURITY_LAST_EXCEPTION}
 <form method="post" action="${pageContext.request.contextPath}/login">
     <div class="field">
         <label class="label">Email</label>
