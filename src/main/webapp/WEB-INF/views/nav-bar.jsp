@@ -29,6 +29,9 @@
             <a class="navbar-item has-text-light" href="${pageContext.request.contextPath}/timetable?shift=0">
                 Terminarz
             </a>
+            <a class="navbar-item has-text-light" href="${pageContext.request.contextPath}/contact">
+                Kontakt
+            </a>
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link has-text-light">
@@ -36,9 +39,6 @@
                 </a>
 
                 <div class="navbar-dropdown">
-                    <a class="navbar-item" href="${pageContext.request.contextPath}/contact">
-                        Kontakt
-                    </a>
                     <a class="navbar-item">
                         O stronie
                     </a>
