@@ -43,7 +43,7 @@
                         O stronie
                     </a>
                     <hr class="navbar-divider">
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="${pageContext.request.contextPath}/problem">
                         Zgłoś problem
                     </a>
                 </div>
