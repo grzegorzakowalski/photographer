@@ -7,9 +7,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html style="background-color: #F5F5F5">
+<!doctype html>
+<html>
 <c:import url="header.jsp"/>
-<body>
+<body style="background-color: #F5F5F5">
 
 <c:import url="nav-bar.jsp"/>
     <br>

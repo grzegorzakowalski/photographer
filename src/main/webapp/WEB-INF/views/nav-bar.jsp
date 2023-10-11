@@ -39,7 +39,7 @@
                 </a>
 
                 <div class="navbar-dropdown">
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="${pageContext.request.contextPath}/about">
                         O stronie
                     </a>
                     <hr class="navbar-divider">
