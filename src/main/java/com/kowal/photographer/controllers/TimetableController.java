@@ -85,8 +85,8 @@ public class TimetableController {
         }
         timetable.setConfirmed(false);
 
-        timetableService.add(timetable, configRepository.getMaxPerDay());// zwraca czy dodano czy nie
-        return "redirect:/"; // TODO dodaj obsługę potwierdzenia
+        Boolean added = timetableService.add(timetable, configRepository.getMaxPerDay());
+        return "redirect:/?added=" + added ;
     }
 
     @GetMapping("/confirm")

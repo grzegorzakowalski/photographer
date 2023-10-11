@@ -14,6 +14,18 @@
 
 <c:import url="nav-bar.jsp"/>
     <br>
+    <c:if test="${added != null}">
+        <c:if test="${added}">
+            <section class="section">
+                <h1 class="title help is-success">Termin został poprawnie dodany na listę oczekujących</h1>
+            </section>
+        </c:if>
+        <c:if test="${added == false}">
+            <section class="section">
+                <h1 class="title help is-danger">Coś poszło nie tak przy dodawaniu terminu</h1>
+            </section>
+        </c:if>
+    </c:if>
     <div class="tile is-ancestor">
         <div class="tile is-parent is-vertical">
             <div class="tile is-child box">
