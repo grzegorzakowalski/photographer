@@ -15,7 +15,7 @@ public class UserService {
 
     public User getTempUser(){
         User user = new User();
-//        user.setUsername("Anon" + userRepository.findMaxId());
+        user.setFirstName("Anon");
         user.setRole("ROLE_TEMP");
         user.setActive(false);
         user.setPassword(passwordEncoder.encode("yolo"));

@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: kowal
@@ -5,14 +7,46 @@
   Time: 20:30
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
+<html style="background-color: #F5F5F5">
+<c:import url="header.jsp"/>
 <body>
+<c:import url="nav-bar.jsp"/>
 
-<%--TODO Wyświetlanie co tam kto chce i formularza--%>
+<div class="container-fluid">
+    <section class="section">
+        <h1 class="title">${timetable.owner.firstName}, nr tel:${timetable.owner.phoneNumber}, email: ${timetable.owner.username}</h1>
+        <h2 class="subtitle">
+            Opis:<br>
+            ${timetable.description}<br>
+            Preferowana godzina: ${timetable.hour}
+        </h2>
+    </section>
+    <form:form modelAttribute="timetable" method="post">
+        <div class="field">
+            <label class="label">Popraw opis (wymagane, ale jak opis jest według Ciebie poprawny i zrozumiały to go przekopiuj).</label>
+            <div class="control">
+                <form:input path="description" cssClass="input"/>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Popraw godzinę (wymagane, ale jeżeli godzina się zgadza to ją przekopiuj).</label>
+            <div class="control">
+                <form:input path="hour" cssClass="input"/>
+            </div>
+        </div>
+        <form:hidden path="owner"/>
+        <form:hidden path="date"/>
+        <form:hidden path="id"/>
+        <form:hidden path="confirmed"/>
+        <button type="submit" class="button is-link">Zatwierdź</button>
+    </form:form>
+    <form:form method="get" modelAttribute="timetable" action="/timetable/delete">
+        <form:hidden path="id"/>
+        <button type="submit" class="button is-danger">Usuń</button>
+    </form:form>
 
+</div>
 </body>
 </html>

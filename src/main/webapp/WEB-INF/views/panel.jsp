@@ -13,7 +13,7 @@
 <body>
 <c:import url="nav-bar.jsp"/>
 <div class="container is-fluid">
-    <section class="section is-large">
+    <section class="section">
         <h1 class="title">Witaj ${user.firstName}!</h1>
         <h2 class="subtitle">
             Oto panel do kontrolowania twojego konta.
@@ -42,7 +42,7 @@
             <h1 class="title">Lista oczekujących terminów do zatwierdzenia:</h1>
             <h2 class="subtitle">
                 <c:forEach items="${notConfirmedTimetable}" var="entry">
-                        <a href="${pageContext.request.contextPath}/timetable/confirm?id=${entry.id}">${entry.date}: ${entry.description}</a>
+                        <a href="${pageContext.request.contextPath}/timetable/confirm?id=${entry.id}">${entry.date}: ${entry.description}</a><br>
                 </c:forEach>
             </h2>
         </section>

@@ -19,7 +19,6 @@ public class Timetable {
     @Valid
     private User owner;
     private Boolean confirmed;
-    @NotBlank
     private String hour;
     @NotBlank
     private String description;

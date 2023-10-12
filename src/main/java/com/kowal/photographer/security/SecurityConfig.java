@@ -21,6 +21,7 @@ public class SecurityConfig {
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception{
         return http.authorizeHttpRequests()
                 .antMatchers("/panel").hasAnyRole("USER","ADMIN")
+                .antMatchers("/timetable/confirm", "/timetable/delete").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .csrf().disable()

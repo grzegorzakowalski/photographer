@@ -3,10 +3,14 @@ package com.kowal.photographer;
 import com.kowal.photographer.services.MonthService;
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
 @Data
 @ToString
 public class Month {
@@ -28,33 +32,7 @@ public class Month {
     }
 
     private String getMonthNameInPolish(LocalDate localDate){
-        switch (localDate.getMonth().getValue()){
-            case 1: return "Styczeń";
-
-            case 2: return "Luty";
-
-            case 3: return "Marzec";
-
-            case 4: return "Kwiecień";
-
-            case 5: return "Maj";
-
-            case 6: return "Czerwiec";
-
-            case 7: return "Lipiec";
-
-            case 8: return "Sierpień";
-
-            case 9: return "Wrzesień";
-
-            case 10: return "Październik";
-
-            case 11: return "Listopad";
-
-            case 12: return "Grudzień";
-
-        }
-        return "Jak to się pojawiło to jest na prawdę źle";
+        return StringUtils.capitalize(localDate.getMonth().getDisplayName(TextStyle.FULL_STANDALONE, Locale.forLanguageTag("pl")));
     }
 
 }

@@ -8,10 +8,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<c:import url="header.jsp"></c:import>
+<c:import url="header.jsp"/>
 <body>
-<c:import url="nav-bar.jsp"></c:import>
-<div class="container is-fluid">
+<c:import url="nav-bar.jsp"/>
+<div class="container">
 
         <br>
         <div class="tile is-ancestor">

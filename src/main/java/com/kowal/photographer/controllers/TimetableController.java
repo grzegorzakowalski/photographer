@@ -2,7 +2,6 @@ package com.kowal.photographer.controllers;
 
 import com.kowal.photographer.Month;
 import com.kowal.photographer.entitys.Timetable;
-import com.kowal.photographer.entitys.User;
 import com.kowal.photographer.repositorys.ConfigRepository;
 import com.kowal.photographer.repositorys.TimetableRepository;
 import com.kowal.photographer.repositorys.UserRepository;
@@ -30,15 +29,13 @@ import java.util.Set;
 public class TimetableController {
     private final TimetableService timetableService;
     private final UserService userService;
-    private final UserRepository userRepository;
+    private final Validator validator;
     private final ConfigRepository configRepository;
     private final TimetableRepository timetableRepository;
-    private final Validator validator;
 
     public TimetableController(TimetableService timetableService, UserService userService, UserRepository userRepository, ConfigRepository configRepository, TimetableRepository timetableRepository, Validator validator) {
         this.timetableService = timetableService;
         this.userService = userService;
-        this.userRepository = userRepository;
         this.configRepository = configRepository;
         this.timetableRepository = timetableRepository;
         this.validator = validator;
@@ -84,7 +81,6 @@ public class TimetableController {
             return "timetable-add";
         }
         timetable.setConfirmed(false);
-
         Boolean added = timetableService.add(timetable, configRepository.getMaxPerDay());
         return "redirect:/?added=" + added ;
     }
@@ -97,7 +93,33 @@ public class TimetableController {
         }
         Timetable timetable = byId.get();
         model.addAttribute("timetable", timetable);
-        model.addAttribute("user", userRepository.findUserByUsername(timetable.getOwner().getUsername()));
         return "timetable-confirm";
+    }
+    @PostMapping("/confirm")
+    public String confirmTimetable(Timetable timetable, Model model){
+        Set<ConstraintViolation<Timetable>> validate = validator.validate(timetable);
+        if(!validate.isEmpty()){
+            model.addAttribute("validate", validate);
+            return "/timetable-confirm";
+        }
+        timetable.setConfirmed(true);
+        timetableRepository.save(timetable);
+        return "redirect:/panel";
+    }
+
+    @GetMapping("/delete")
+    public String deleteConfirmation(@RequestParam("id") long id, Model model){
+        Optional<Timetable> optional = timetableRepository.findById(id);
+        if(optional.isPresent()) {
+            model.addAttribute("timetable", optional.get());
+            return "timetable-delete-confirmation";
+        }
+        return "/panel"; // dodaj error
+    }
+
+    @PostMapping("/delete")
+    public String deleteTimetable(Timetable timetable){
+        timetableRepository.delete(timetable);
+        return "redirect:/panel";
     }
 }
