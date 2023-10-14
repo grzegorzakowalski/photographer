@@ -7,11 +7,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html style="background-color: #F5F5F5">
+<!doctype html>
+<html>
 <c:import url="header.jsp"/>
 <body>
+<section class="hero ${siteColor} is-fullheight">
 <c:import url="nav-bar.jsp"/>
-
+<div class="hero-body">
+    <br>
 <div class="container-fluid">
     <section class="section">
         <h1 class="title">${myMonth.name} ${year}</h1>
@@ -19,16 +22,17 @@
             Jeżeli w polu jest tekst na czerwono, oznacza to, że tego dnia już wolnych terminów.
         </h2>
     </section>
-    <table class="table is-bordered is-striped is-hoverable is-fullwidth">
-        <thead style="background-color: #001F3F">
-        <tr>
-            <th class="has-text-light">Poniedziałek</th>
-            <th class="has-text-light">Wtorek</th>
-            <th class="has-text-light">Środa</th>
-            <th class="has-text-light">Czwartek</th>
-            <th class="has-text-light">Piątek</th>
-            <th class="has-text-light">Sobota</th>
-            <th class="has-text-light">Niedziela</th>
+    <div class="table-container">
+    <table class=" is-striped is-hoverable is-fullwidth is-bordered">
+        <thead >
+        <tr class="${siteColor} is-inverted">
+            <th>Poniedziałek</th>
+            <th>Wtorek</th>
+            <th>Środa</th>
+            <th>Czwartek</th>
+            <th>Piątek</th>
+            <th>Sobota</th>
+            <th>Niedziela</th>
         </tr>
         </thead>
         <tbody>
@@ -40,7 +44,7 @@
                         <c:if test="${actualDayOfMonth > 0 && actualDayOfMonth <= lastDayOfMonth}">
                             <c:choose>
                                 <c:when test="${!allUnavailable.get(actualDayOfMonth - 1)}">
-                                    <p class="help is-success" style="font-size: 1.25rem"><strong class="">${actualDayOfMonth}.<c:if test="${actualDayOfMonth < 10}">&nbsp;&nbsp;</c:if></strong> <a href="/timetable/add?day=${actualDayOfMonth}&month=${month}&year=${year}">Zabukuj termin</a>
+                                    <p style="font-size: 1.25rem" class="is-selected"><strong class="">${actualDayOfMonth}.<c:if test="${actualDayOfMonth < 10}">&nbsp;&nbsp;</c:if></strong> <a href="/timetable/add?day=${actualDayOfMonth}&month=${month}&year=${year}">Zabukuj termin</a>
                                     <span class="icon">
                                         <i class="fas fa-scroll"></i>
                                     </span>
@@ -59,11 +63,12 @@
             </c:forEach>
         </tbody>
     </table>
+    </div>
     <form method="get">
-        <div class="field is-grouped is-grouped-right">
+        <div class="buttons is-right">
             <p class="control">
-                <button name="shift" value="${shift - 1}" type="submit" class="button is-link">Poprzedni miesiąc</button>
-                <button name="shift" value="${shift + 1}" type="submit" class="button is-link">Następny miesiąc</button>
+                <button name="shift" value="${shift - 1}" type="submit" class="button ${siteColor} is-inverted">Poprzedni miesiąc</button>
+                <button name="shift" value="${shift + 1}" type="submit" class="button ${siteColor} is-inverted">Następny miesiąc</button>
             </p>
         </div>
     </form>
@@ -73,8 +78,9 @@
                 Jeżeli nie ma wolnych terminów danego dnia, zawsze można spróbować kontaktu telefonicznego, albo poprzez Email.
             </h2>
         </section>
-
 </div>
-
+</div>
+<c:import url="footer.jsp"/>
+</section>
 </body>
 </html>
