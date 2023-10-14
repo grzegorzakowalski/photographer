@@ -2,6 +2,7 @@ package com.kowal.photographer.services;
 
 import com.kowal.photographer.entitys.Configuration;
 import com.kowal.photographer.repositorys.ConfigRepository;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.Map;
 @Service
 public class ConfigurationService {
     private final ConfigRepository configRepository;
+    @Getter
     Map<String,String> colorMap;
 
     public ConfigurationService(ConfigRepository configRepository) {
@@ -27,16 +29,16 @@ public class ConfigurationService {
     public void checkConfigurationIfEmptyCreate(){
         getMaxPerDay();
         getSiteColor();
-
+        getAboutMe();
     }
 
     private Configuration getMaxPerDay(){
-        Configuration maxPerDay = configRepository.getMaxPerDay();
+        Configuration maxPerDay = configRepository.getDistinctByNameIsLike("max_per_day");
         if( maxPerDay == null){
-            Configuration c = new Configuration();
-            c.setName("max_per_day");
-            c.setValue("3");
-            configRepository.save(c);
+            maxPerDay = new Configuration();
+            maxPerDay.setName("max_per_day");
+            maxPerDay.setValue("3");
+            configRepository.save(maxPerDay);
         }
         return maxPerDay;
     }
@@ -46,12 +48,12 @@ public class ConfigurationService {
     }
 
     private Configuration getSiteColor(){
-        Configuration siteColor = configRepository.getSiteColor();
+        Configuration siteColor = configRepository.getDistinctByNameIsLike("site_color");
         if( siteColor == null){
-            Configuration c = new Configuration();
-            c.setName("site_color");
-            c.setValue(colorMap.get("blue"));
-            configRepository.save(c);
+            siteColor = new Configuration();
+            siteColor.setName("site_color");
+            siteColor.setValue(colorMap.get("blue"));
+            configRepository.save(siteColor);
         }
         return siteColor;
     }
@@ -63,6 +65,27 @@ public class ConfigurationService {
     public void setMaxPerDay(String maxPerDay){
         Configuration c = getMaxPerDay();
         c.setValue(maxPerDay);
+        configRepository.save(c);
+    }
+
+    private Configuration getAboutMe(){
+        Configuration aboutMe = configRepository.getDistinctByNameIsLike("about_me");
+        if( aboutMe == null){
+            aboutMe = new Configuration();
+            aboutMe.setName("about_me");
+            aboutMe.setValue("Tutaj coś do powiedzenia o sobie");
+            configRepository.save(aboutMe);
+        }
+        return aboutMe;
+    }
+
+    public String getStringAboutMe(){
+        return getAboutMe().getValue();
+    }
+
+    public void setAboutMe(String inputText){
+        Configuration c = getAboutMe();
+        c.setValue(inputText);
         configRepository.save(c);
     }
 

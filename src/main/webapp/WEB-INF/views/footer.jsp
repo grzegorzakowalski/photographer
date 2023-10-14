@@ -16,7 +16,7 @@
                 <li class="<c:if test="${footerIsActive.equals('home')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/">O mnie</a></li>
                 <li class="<c:if test="${footerIsActive.equals('galery')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/galery">Galeria</a></li>
                 <sec:authorize access="hasRole('ADMIN')">
-                <li class=""><a>Zmodyfikuj o mnie</a></li>
+                <li class="<c:if test="${footerIsActive.equals('aboutMe')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/page-settings">Ustawienia strony</a></li>
                 </sec:authorize>
             </ul>
         </div>

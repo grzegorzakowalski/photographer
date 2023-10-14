@@ -19,7 +19,7 @@
     <br>
 <form:form modelAttribute="user" method="post">
     <div class="field">
-        <label class="label">Email</label>
+        <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Email</label>
         <div class="control">
             <form:input path="username" cssClass="input" placeholder="Jan.Kowalski@example.pl"/>
         </div>
@@ -31,7 +31,7 @@
 
     </div>
     <div class="field">
-        <label class="label">Hasło</label>
+        <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Hasło</label>
         <div class="control">
             <form:password path="password" cssClass="input"/>
         </div>
@@ -42,7 +42,7 @@
         </c:forEach>
     </div>
     <div class="field">
-        <label class="label">Numer telefonu</label>
+        <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Numer telefonu</label>
         <div class="control">
             <form:input path="phoneNumber" cssClass="input" placeholder="123456789"/>
         </div>
@@ -53,14 +53,14 @@
         </c:forEach>
     </div>
     <div class="field">
-        <label class="label">Imię</label>
+        <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Imię</label>
         <div class="control">
             <form:input path="firstName" cssClass="input" placeholder="Jan"/>
         </div>
     </div>
     <div class="field is-grouped is-grouped-right">
         <p class="control">
-            <form:button class="button is-primary" type="submit">
+            <form:button class="button ${siteColor} is-inverted" type="submit">
                 Submit
             </form:button>
         </p>
