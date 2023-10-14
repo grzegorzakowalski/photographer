@@ -6,6 +6,7 @@ import com.kowal.photographer.repositorys.ConfigRepository;
 import com.kowal.photographer.repositorys.TimetableRepository;
 import com.kowal.photographer.repositorys.UserRepository;
 import com.kowal.photographer.security.CurrentUser;
+import com.kowal.photographer.services.ConfigurationService;
 import com.kowal.photographer.services.MonthService;
 import com.kowal.photographer.services.TimetableService;
 import com.kowal.photographer.services.UserService;
@@ -30,13 +31,13 @@ public class TimetableController {
     private final TimetableService timetableService;
     private final UserService userService;
     private final Validator validator;
-    private final ConfigRepository configRepository;
+    private final ConfigurationService configurationService;
     private final TimetableRepository timetableRepository;
 
-    public TimetableController(TimetableService timetableService, UserService userService, UserRepository userRepository, ConfigRepository configRepository, TimetableRepository timetableRepository, Validator validator) {
+    public TimetableController(TimetableService timetableService, UserService userService, UserRepository userRepository, ConfigRepository configRepository, TimetableRepository timetableRepository, Validator validator, ConfigurationService configurationService) {
         this.timetableService = timetableService;
         this.userService = userService;
-        this.configRepository = configRepository;
+        this.configurationService = configurationService;
         this.timetableRepository = timetableRepository;
         this.validator = validator;
     }
@@ -46,7 +47,7 @@ public class TimetableController {
         LocalDate actualDate = LocalDate.now().plusMonths(shift);
         MonthService monthService = new MonthService(actualDate);
         Month month = new Month(actualDate);
-        Integer maxSize = configRepository.getMaxPerDay();
+        Integer maxSize = configurationService.getIntegerMaxPerDay();
         model.addAttribute("maxSize", maxSize);
         model.addAttribute("firstDayOfMonth", monthService.getFirstDayAsNumberOfWeekDay());
         model.addAttribute("lastDayOfMonth", monthService.getMonthLength());
@@ -81,7 +82,7 @@ public class TimetableController {
             return "timetable-add";
         }
         timetable.setConfirmed(false);
-        Boolean added = timetableService.add(timetable, configRepository.getMaxPerDay());
+        Boolean added = timetableService.add(timetable);
         return "redirect:/?added=" + added ;
     }
 

@@ -10,7 +10,8 @@
 <!doctype html>
 <html>
 <c:import url="header.jsp"/>
-<body style="background-color: #F5F5F5">
+<body>
+<section class="hero is-success is-fullheight">
 
 <c:import url="nav-bar.jsp"/>
     <br>
@@ -68,6 +69,6 @@
         </div>
     </div>
 
-
+</section>
 </body>
 </html>

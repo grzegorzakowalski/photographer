@@ -21,10 +21,7 @@ public class TimetableService {
         this.userRepository = userRepository;
     }
     @NotNull
-    public Boolean add(Timetable entity, Integer size){
-        if( timetableRepository.findAllByDate(entity.getDate()).size() >= size){
-            return false;
-        }
+    public Boolean add(Timetable entity){
         if( entity.getId() != null){
             return false;
         }
