@@ -29,7 +29,7 @@
             <div class="container">
                 <ul>
                     <li class="<c:if test="${footerIsActive.equals('timetable')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/timetable">Zabukuj termin</a></li>
-                    <li class="<c:if test="${footerIsActive.equals('contakt')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/contact">Kontakt</a></li>
+                    <li class="<c:if test="${footerIsActive.equals('contact')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/contact">Kontakt</a></li>
                     <sec:authorize access="hasRole('ADMIN')">
                         <li class="<c:if test="${footerIsActive.equals('aboutMe')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/page-settings">Terminy do zabukowania i ustawienia</a></li>
                     </sec:authorize>
