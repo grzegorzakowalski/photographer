@@ -28,7 +28,7 @@
                     <a class="navbar-item <c:if test="${navIsActive.equals('home')}">is-active</c:if>" href="${pageContext.request.contextPath}/">
                         Strona startowa
                     </a>
-                    <a class="navbar-item" href="${pageContext.request.contextPath}/timetable">
+                    <a class="navbar-item <c:if test="${navIsActive.equals('timetable')}">is-active</c:if>" href="${pageContext.request.contextPath}/timetable">
                         Zabukuj termin
                     </a>
                     <a class="navbar-item" href="${pageContext.request.contextPath}/about">

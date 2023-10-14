@@ -44,6 +44,10 @@ public class TimetableController {
 
     @GetMapping
     public String timetableView(Model model, @RequestParam(name = "shift", defaultValue = "0") Integer shift, HttpSession session){
+        model.addAttribute("siteColor",configurationService.getStringSiteColor());
+        model.addAttribute("navIsActive","timetable");
+        model.addAttribute("footerIsActive","timetable");
+
         LocalDate actualDate = LocalDate.now().plusMonths(shift);
         MonthService monthService = new MonthService(actualDate);
         Month month = new Month(actualDate);

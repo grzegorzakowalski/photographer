@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
+
 <c:import url="header.jsp"/>
 <body>
 <section class="hero ${siteColor} is-fullheight">
@@ -36,7 +37,7 @@
                 </figure>
             </div>
             <div class="container">
-                <p class="title has-text-centered">Tutaj pare słów o sobie </p>
+                <p class="title has-text-centered">${aboutMe}</p>
             </div>
         </div>
 

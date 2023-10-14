@@ -23,3 +23,18 @@
     </nav>
 </div>
 </c:if>
+<c:if test="${navIsActive.equals('timetable')}">
+    <div class="hero-foot">
+        <nav class="tabs is-boxed is-fullwidth">
+            <div class="container">
+                <ul>
+                    <li class="<c:if test="${footerIsActive.equals('timetable')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/timetable">Zabukuj termin</a></li>
+                    <li class="<c:if test="${footerIsActive.equals('contakt')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/contact">Kontakt</a></li>
+                    <sec:authorize access="hasRole('ADMIN')">
+                        <li class="<c:if test="${footerIsActive.equals('aboutMe')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/page-settings">Terminy do zabukowania i ustawienia</a></li>
+                    </sec:authorize>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</c:if>

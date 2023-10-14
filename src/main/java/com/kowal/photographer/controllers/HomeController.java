@@ -19,7 +19,7 @@ public class HomeController {
     public String homePageView(Model model, @RequestParam(name = "added", required = false) Boolean added){
         configurationService.checkConfigurationIfEmptyCreate();
         model.addAttribute("added", added);
-
+        model.addAttribute("aboutMe",configurationService.getStringAboutMe());
 
         model.addAttribute("siteColor",configurationService.getStringSiteColor());
         model.addAttribute("navIsActive","home");
