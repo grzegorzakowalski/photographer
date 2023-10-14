@@ -7,10 +7,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ConfigRepository extends JpaRepository<Configuration,Long> {
-    @Query("SELECT c.value FROM Configuration c WHERE c.name like 'max_per_day'")
+    @Query("SELECT c FROM Configuration c WHERE c.name like 'max_per_day'")
     Configuration getMaxPerDay();
 
-    @Query("SELECT c.value FROM Configuration c WHERE c.name like 'site_color'")
+    @Query("SELECT c FROM Configuration c WHERE c.name like 'site_color'")
     Configuration getSiteColor();
 
 }

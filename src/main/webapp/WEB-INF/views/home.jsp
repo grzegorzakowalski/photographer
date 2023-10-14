@@ -11,63 +11,38 @@
 <html>
 <c:import url="header.jsp"/>
 <body>
-<section class="hero is-success is-fullheight">
+<section class="hero ${siteColor} is-fullheight">
 
 <c:import url="nav-bar.jsp"/>
+
+    <div class="hero-body">
     <br>
     <c:if test="${added != null}">
         <c:if test="${added}">
-            <section class="section">
+            <section class="section has-text-centered">
                 <h1 class="title help is-success">Termin został poprawnie dodany na listę oczekujących</h1>
             </section>
         </c:if>
         <c:if test="${added == false}">
-            <section class="section">
+            <section class="section has-text-centered">
                 <h1 class="title help is-danger">Coś poszło nie tak przy dodawaniu terminu</h1>
             </section>
         </c:if>
     </c:if>
-    <div class="tile is-ancestor">
-        <div class="tile is-parent is-vertical">
-            <div class="tile is-child box">
-                <img src="home-page-photo.jpg">
+        <div class="tile is-ancestor">
+            <div class="tile">
+                <figure class="image">
+                    <img src="home-page-photo.jpg" alt="Moje zdjęcie" class="is-rounded">
+                </figure>
             </div>
-            <div class="tile is-child box">
-                <p class="title">${user}</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-            </div>
-        </div>
-        <div class="tile is-parent is-vertical">
-            <div class="tile is-child box">
-                <p class="title">Witaj na mojej stronie!</p>
-                <p>Jestem początkującym fotografem </p>
-            </div>
-            <div class="tile is-child box">
-                <img src="home-page-photo.jpg">
+            <div class="container">
+                <p class="title has-text-centered">Tutaj pare słów o sobie </p>
             </div>
         </div>
-    </div>
-    <div class="tile is-ancestor">
-        <div class="tile is-parent is-vertical">
-            <div class="tile is-child box">
-                <img src="home-page-photo.jpg">
-            </div>
-            <div class="title is-child box">
-                <p class="title">Witaj na mojej stronie!</p>
-                <p>Jestem początkującym fotografem </p>
-            </div>
-        </div>
-        <div class="tile is-parent is-vertical">
-            <div class="tile is-child box">
-                <p class="title">Witaj na mojej stronie!</p>
-                <p>Jestem początkującym fotografem </p>
-            </div>
-            <div class="title is-child box">
-                <img src="home-page-photo.jpg">
 
-            </div>
-        </div>
     </div>
+
+    <c:import url="footer.jsp"/>
 
 </section>
 </body>

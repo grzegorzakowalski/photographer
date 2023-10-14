@@ -45,7 +45,7 @@ public class ConfigurationService {
         return Integer.parseInt(getMaxPerDay().getValue());
     }
 
-    public Configuration getSiteColor(){
+    private Configuration getSiteColor(){
         Configuration siteColor = configRepository.getSiteColor();
         if( siteColor == null){
             Configuration c = new Configuration();
@@ -54,6 +54,10 @@ public class ConfigurationService {
             configRepository.save(c);
         }
         return siteColor;
+    }
+
+    public String getStringSiteColor(){
+        return getSiteColor().getValue();
     }
 
     public void setMaxPerDay(String maxPerDay){
