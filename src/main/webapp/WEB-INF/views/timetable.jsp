@@ -72,12 +72,12 @@
             </p>
         </div>
     </form>
-        <section class="section">
-            <h1 class="title">Uwaga!</h1>
-            <h2 class="subtitle">
-                Jeżeli nie ma wolnych terminów danego dnia, zawsze można spróbować kontaktu telefonicznego, albo poprzez Email.
-            </h2>
-        </section>
+<%--        <section class="section">--%>
+<%--            <h1 class="title">Uwaga!</h1>--%>
+<%--            <h2 class="subtitle">--%>
+<%--                Jeżeli nie ma wolnych terminów danego dnia, zawsze można spróbować kontaktu telefonicznego, albo poprzez Email.--%>
+<%--            </h2>--%>
+<%--        </section>--%>
 </div>
 </div>
 <c:import url="footer.jsp"/>
