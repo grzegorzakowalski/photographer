@@ -16,9 +16,8 @@ public class HomeController {
     }
 
     @GetMapping
-    public String homePageView(Model model, @RequestParam(name = "added", required = false) Boolean added){
+    public String homePageView(Model model){
         configurationService.checkConfigurationIfEmptyCreate();
-        model.addAttribute("added", added);
         model.addAttribute("aboutMe",configurationService.getStringAboutMe());
 
         model.addAttribute("siteColor",configurationService.getStringSiteColor());

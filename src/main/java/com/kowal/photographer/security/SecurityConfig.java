@@ -24,6 +24,8 @@ public class SecurityConfig {
                 .antMatchers("/timetable/confirm",
                         "/timetable/delete",
                         "/timetable/list",
+                        "/problem/list",
+                        "/problem/resolve",
                         "/page-settings").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()

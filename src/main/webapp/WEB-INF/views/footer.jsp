@@ -46,7 +46,7 @@
                     <li class="<c:if test="${footerIsActive.equals('about')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/about">O stronie</a></li>
                     <li class="<c:if test="${footerIsActive.equals('problem')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/problem">Zgłoś problem</a></li>
                     <sec:authorize access="hasRole('ADMIN')">
-                        <li class="<c:if test="${footerIsActive.equals('problemList')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/placeholder">Lista zgłoszonych problemów</a></li>
+                        <li class="<c:if test="${footerIsActive.equals('problemList')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/problem/list">Lista zgłoszonych problemów</a></li>
                     </sec:authorize>
                 </ul>
             </div>

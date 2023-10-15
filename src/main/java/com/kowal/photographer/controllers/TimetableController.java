@@ -90,8 +90,8 @@ public class TimetableController {
             return "timetable-add";
         }
         timetable.setConfirmed(false);
-        Boolean added = timetableService.add(timetable);
-        return "redirect:/?added=" + added ;
+        timetableService.add(timetable);
+        return "redirect:/";
     }
 
     @GetMapping("/confirm")

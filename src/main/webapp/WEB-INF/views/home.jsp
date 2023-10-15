@@ -18,18 +18,6 @@
 
     <div class="hero-body">
     <br>
-    <c:if test="${added != null}">
-        <c:if test="${added}">
-            <section class="section has-text-centered">
-                <h1 class="title help is-success">Termin został poprawnie dodany na listę oczekujących</h1>
-            </section>
-        </c:if>
-        <c:if test="${added == false}">
-            <section class="section has-text-centered">
-                <h1 class="title help is-danger">Coś poszło nie tak przy dodawaniu terminu</h1>
-            </section>
-        </c:if>
-    </c:if>
         <div class="tile is-ancestor">
             <div class="tile">
                 <figure class="image">
