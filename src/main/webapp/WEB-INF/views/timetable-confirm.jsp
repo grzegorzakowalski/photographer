@@ -9,12 +9,14 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html style="background-color: #F5F5F5">
+<html>
 <c:import url="header.jsp"/>
 <body>
-<c:import url="nav-bar.jsp"/>
-
-<div class="container-fluid">
+<section class="hero ${siteColor} is-fullheight">
+    <c:import url="nav-bar.jsp"/>
+    <div class="hero-body">
+        <br>
+        <div class="container has-text-centered">
     <section class="section">
         <h1 class="title">${timetable.owner.firstName}, nr tel:${timetable.owner.phoneNumber}, email: ${timetable.owner.username}</h1>
         <h2 class="subtitle">
@@ -40,13 +42,16 @@
         <form:hidden path="date"/>
         <form:hidden path="id"/>
         <form:hidden path="confirmed"/>
-        <button type="submit" class="button is-link">Zatwierdź</button>
+        <button type="submit" class="button ${siteColor} is-inverted">Zatwierdź</button>
     </form:form>
     <form:form method="get" modelAttribute="timetable" action="/timetable/delete">
         <form:hidden path="id"/>
-        <button type="submit" class="button is-danger">Usuń</button>
+        <button type="submit" class="button is-danger is-inverted">Usuń</button>
     </form:form>
 
 </div>
+    </div>
+    <c:import url="footer.jsp"/>
+</section>
 </body>
 </html>

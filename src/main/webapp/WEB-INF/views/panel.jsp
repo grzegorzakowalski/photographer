@@ -37,16 +37,6 @@
             </h2>
         </section>
     </c:if>
-    <sec:authorize access="hasRole('ADMIN')">
-        <section class="section">
-            <h1 class="title">Lista oczekujących terminów do zatwierdzenia:</h1>
-            <h2 class="subtitle">
-                <c:forEach items="${notConfirmedTimetable}" var="entry">
-                        <a href="${pageContext.request.contextPath}/timetable/confirm?id=${entry.id}">${entry.date}: ${entry.description}</a><br>
-                </c:forEach>
-            </h2>
-        </section>
-    </sec:authorize>
 </div>
 
 </body>

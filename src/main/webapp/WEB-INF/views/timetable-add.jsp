@@ -13,8 +13,9 @@
 <html style="background-color: #F5F5F5">
 <c:import url="header.jsp"/>
 <body>
-<c:import url="nav-bar.jsp"/>
-<div class="container is-fluid">
+<section class="hero ${siteColor} is-fullheight">
+    <c:import url="nav-bar.jsp"/>
+    <div class="hero-body">
     <br>
     <br>
 <form:form modelAttribute="timetable" method="post">
@@ -28,7 +29,7 @@
     </section>
     <sec:authorize access="isAnonymous()">
     <div class="field">
-        <label class="label">Email</label>
+        <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Email</label>
         <div class="control">
             <form:input path="owner.username" cssClass="input" placeholder="Jan.Kowalski@example.pl"/>
         </div>
@@ -39,7 +40,7 @@
         </c:forEach>
     </div>
     <div class="field">
-        <label class="label">Numer telefonu</label>
+        <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Numer telefonu</label>
         <div class="control">
             <form:input path="owner.phoneNumber" cssClass="input" placeholder="511 111 111"/>
         </div>
@@ -59,7 +60,7 @@
     </sec:authorize>
     <form:hidden path="date"/>
     <div class="field">
-        <label class="label">Godzina początku sesji, która by Ci najbardziej pasowała.</label>
+        <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Godzina początku sesji, która by Ci najbardziej pasowała.</label>
         <div class="control">
             <form:input path="hour" cssClass="input" placeholder="15:00"/>
         </div>
@@ -70,7 +71,7 @@
         </c:forEach>
     </div>
     <div class="field">
-        <label class="label">Twój opis, czego oczekujesz, cokolwiek chcesz powiedzieć o tej sesji umieść to tutaj.</label>
+        <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Twój opis, czego oczekujesz, cokolwiek chcesz powiedzieć o tej sesji umieść to tutaj.</label>
         <div class="control">
             <form:textarea path="description" cssClass="textarea"/>
         </div>
@@ -82,7 +83,7 @@
     </div>
     <div class="field is-grouped is-grouped-right">
         <p class="control">
-            <form:button class="button is-primary" type="submit">
+            <form:button class="button #{siteColor} is-inverted" type="submit">
                 Submit
             </form:button>
         </p>
@@ -91,5 +92,7 @@
 </form:form>
 
 </div>
+        <c:import url="footer.jsp"/>
+</section>
 </body>
 </html>

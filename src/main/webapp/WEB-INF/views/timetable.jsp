@@ -16,14 +16,14 @@
 <div class="hero-body">
     <br>
 <div class="container-fluid">
-    <section class="section">
+    <section class="section has-text-centered">
         <h1 class="title">${myMonth.name} ${year}</h1>
         <h2 class="subtitle">
             Jeżeli w polu jest tekst na czerwono, oznacza to, że tego dnia już wolnych terminów.
         </h2>
     </section>
     <div class="table-container">
-    <table class=" is-striped is-hoverable is-fullwidth is-bordered">
+    <table class="table is-striped is-hoverable is-fullwidth is-bordered">
         <thead >
         <tr class="${siteColor} is-inverted">
             <th>Poniedziałek</th>
@@ -44,7 +44,7 @@
                         <c:if test="${actualDayOfMonth > 0 && actualDayOfMonth <= lastDayOfMonth}">
                             <c:choose>
                                 <c:when test="${!allUnavailable.get(actualDayOfMonth - 1)}">
-                                    <p style="font-size: 1.25rem" class="is-selected"><strong class="">${actualDayOfMonth}.<c:if test="${actualDayOfMonth < 10}">&nbsp;&nbsp;</c:if></strong> <a href="/timetable/add?day=${actualDayOfMonth}&month=${month}&year=${year}">Zabukuj termin</a>
+                                    <p style="font-size: 1.25rem" class="is-selected"><strong class="">${actualDayOfMonth}.<c:if test="${actualDayOfMonth < 10}">&nbsp;&nbsp;</c:if></strong> <a href="/timetable/add?day=${actualDayOfMonth}&month=${month}&year=${year}">Zarezerwuj termin</a>
                                     <span class="icon">
                                         <i class="fas fa-scroll"></i>
                                     </span>

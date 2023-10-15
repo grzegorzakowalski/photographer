@@ -8,30 +8,33 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html style="background-color: #F5F5F5">
+<html>
 <c:import url="header.jsp"/>
 <body>
-<c:import url="nav-bar.jsp"/>
+<section class="hero ${siteColor} is-fullheight">
+  <c:import url="nav-bar.jsp"/>
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <section class="section is-large">
+        <h2 class="subtitle">
+          ${timetable.owner.firstName}, nr tel:${timetable.owner.phoneNumber}, email: ${timetable.owner.username}<br>
+          Opis:<br>
+          ${timetable.description}<br>
+          Preferowana godzina: ${timetable.hour}<br>
+        </h2>
+        <h1 class="title">
+          <form:form modelAttribute="timetable" method="post">
+            <form:hidden path="id"/>
+            <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>"><strong>Czy na pewno chcesz usunąć ten wpis?</strong></label>
+            <button type="submit" class="button is-danger is-inverted">Usuń</button>
+            <a href="${pageContext.request.contextPath}/timetable/confirm?id=${timetable.id}" class="button ${siteColor} is-inverted">Wróć</a>
+          </form:form>
+        </h1>
+      </section>
+    </div>
+  </div>
+  <c:import url="footer.jsp"/>
+</section>
 
-<div class="container">
-  <section class="section">
-    <h2 class="subtitle">
-      ${timetable.owner.firstName}, nr tel:${timetable.owner.phoneNumber}, email: ${timetable.owner.username}<br>
-      Opis:<br>
-      ${timetable.description}<br>
-      Preferowana godzina: ${timetable.hour}<br>
-    </h2>
-    <h1 class="title">
-      <form:form modelAttribute="timetable" method="post">
-        <form:hidden path="id"/>
-        <label class="label"><strong>Czy na pewno chcesz usunąć ten wpis?</strong></label>
-        <button type="submit" class="button is-danger">Usuń</button>
-        <a href="${pageContext.request.contextPath}/timetable/confirm?id=${timetable.id}" class="button is-link">Wróć</a>
-      </form:form>
-    </h1>
-  </section>
-
-
-</div>
 </body>
 </html>

@@ -23,6 +23,7 @@ public class SecurityConfig {
                 .antMatchers("/panel").hasAnyRole("USER","ADMIN")
                 .antMatchers("/timetable/confirm",
                         "/timetable/delete",
+                        "/timetable/list",
                         "/page-settings").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()

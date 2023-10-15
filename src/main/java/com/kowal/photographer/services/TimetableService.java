@@ -7,8 +7,10 @@ import com.sun.istack.NotNull;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -62,5 +64,13 @@ public class TimetableService {
             }
         }
         return result;
+    }
+
+    public List<Timetable> getListByConfirmed(boolean isConfirmed){
+        List<Timetable> allByConfirmed = new ArrayList<>();
+        allByConfirmed = timetableRepository.findAllByConfirmed(isConfirmed);
+        return allByConfirmed.stream()
+                .sorted(Comparator.comparing(Timetable::getDate))
+                .toList();
     }
 }

@@ -69,6 +69,10 @@ public class TimetableController {
                                    @RequestParam(name = "month", defaultValue = "1") Integer month,
                                    @RequestParam(name = "year", defaultValue = "2023") Integer year,
                                    @AuthenticationPrincipal CurrentUser currentUser){
+        model.addAttribute("siteColor",configurationService.getStringSiteColor());
+        model.addAttribute("navIsActive","timetable");
+        model.addAttribute("footerIsActive","timetable");
+
         Timetable timetable = new Timetable();
         timetable.setOwner( currentUser != null ? currentUser.getUser() : userService.getTempUser());
         timetable.setDate( LocalDate.of(year, month, day));
@@ -93,6 +97,10 @@ public class TimetableController {
     @GetMapping("/confirm")
     public String timetableConfirmByAdminView( @RequestParam(name = "id") Long id, Model model){
         Optional<Timetable> byId = timetableRepository.findById(id);
+        model.addAttribute("siteColor",configurationService.getStringSiteColor());
+        model.addAttribute("navIsActive","timetable");
+        model.addAttribute("footerIsActive","timetableList");
+
         if(byId.isEmpty()){
             return "/panel";
         }
@@ -109,22 +117,45 @@ public class TimetableController {
         }
         timetable.setConfirmed(true);
         timetableRepository.save(timetable);
-        return "redirect:/panel";
+        return "redirect:/timetable/list";
     }
 
     @GetMapping("/delete")
     public String deleteConfirmation(@RequestParam("id") long id, Model model){
         Optional<Timetable> optional = timetableRepository.findById(id);
+        model.addAttribute("siteColor",configurationService.getStringSiteColor());
+        model.addAttribute("navIsActive","timetable");
+        model.addAttribute("footerIsActive","timetableList");
         if(optional.isPresent()) {
             model.addAttribute("timetable", optional.get());
             return "timetable-delete-confirmation";
         }
-        return "/panel"; // dodaj error
+        return "redirect:/timetable/list?msg=delete-error"; // dodaj error
     }
 
     @PostMapping("/delete")
     public String deleteTimetable(Timetable timetable){
         timetableRepository.delete(timetable);
         return "redirect:/panel";
+    }
+
+    @GetMapping("/list")
+    public String timetableList(Model model,
+                                @RequestParam(name = "msg", required = false)String msg){
+        model.addAttribute("siteColor",configurationService.getStringSiteColor());
+        model.addAttribute("navIsActive","timetable");
+        model.addAttribute("footerIsActive","timetableList");
+        model.addAttribute("allNotConfirmed", timetableService.getListByConfirmed(false));
+        model.addAttribute("allConfirmed", timetableService.getListByConfirmed(true));
+        model.addAttribute("msg",msg);
+        model.addAttribute("maxPerDay",configurationService.getIntegerMaxPerDay());
+        return "timetable-list";
+
+    }
+
+    @PostMapping("/list")
+    public String timetableListForm(Integer maxPerDay){
+        configurationService.setMaxPerDay(maxPerDay.toString());
+        return "redirect:/timetable/list";
     }
 }
