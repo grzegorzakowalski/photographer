@@ -22,5 +22,5 @@ public class Timetable {
     private String hour;
     @NotBlank
     private String description;
-
+    private Boolean isDone;
 }

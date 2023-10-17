@@ -1,8 +1,11 @@
 package com.kowal.photographer.controllers;
 
+import com.kowal.photographer.AddPhoto;
 import com.kowal.photographer.Month;
+import com.kowal.photographer.entitys.Pictures;
 import com.kowal.photographer.entitys.Timetable;
-import com.kowal.photographer.repositorys.ConfigRepository;
+import com.kowal.photographer.entitys.User;
+import com.kowal.photographer.repositorys.PicturesRepository;
 import com.kowal.photographer.repositorys.TimetableRepository;
 import com.kowal.photographer.repositorys.UserRepository;
 import com.kowal.photographer.security.CurrentUser;
@@ -10,6 +13,7 @@ import com.kowal.photographer.services.ConfigurationService;
 import com.kowal.photographer.services.MonthService;
 import com.kowal.photographer.services.TimetableService;
 import com.kowal.photographer.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,24 +26,30 @@ import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 @Controller
 @RequestMapping("/timetable")
+@Slf4j
 public class TimetableController {
     private final TimetableService timetableService;
     private final UserService userService;
     private final Validator validator;
     private final ConfigurationService configurationService;
     private final TimetableRepository timetableRepository;
+    private final UserRepository userRepository;
+    private final PicturesRepository picturesRepository;
 
-    public TimetableController(TimetableService timetableService, UserService userService, UserRepository userRepository, ConfigRepository configRepository, TimetableRepository timetableRepository, Validator validator, ConfigurationService configurationService) {
+    public TimetableController(TimetableService timetableService, UserService userService, TimetableRepository timetableRepository, Validator validator, ConfigurationService configurationService, UserRepository userRepository, PicturesRepository picturesRepository) {
         this.timetableService = timetableService;
         this.userService = userService;
         this.configurationService = configurationService;
         this.timetableRepository = timetableRepository;
         this.validator = validator;
+        this.userRepository = userRepository;
+        this.picturesRepository = picturesRepository;
     }
 
     @GetMapping
@@ -90,6 +100,7 @@ public class TimetableController {
             return "timetable-add";
         }
         timetable.setConfirmed(false);
+        timetable.setIsDone(false);
         timetableService.add(timetable);
         return "redirect:/";
     }
@@ -145,8 +156,8 @@ public class TimetableController {
         model.addAttribute("siteColor",configurationService.getStringSiteColor());
         model.addAttribute("navIsActive","timetable");
         model.addAttribute("footerIsActive","timetableList");
-        model.addAttribute("allNotConfirmed", timetableService.getListByConfirmed(false));
-        model.addAttribute("allConfirmed", timetableService.getListByConfirmed(true));
+        model.addAttribute("allNotConfirmed", timetableService.getNotDoneListByConfirmed(false));
+        model.addAttribute("allConfirmed", timetableService.getNotDoneListByConfirmed(true));
         model.addAttribute("msg",msg);
         model.addAttribute("maxPerDay",configurationService.getIntegerMaxPerDay());
         return "timetable-list";
@@ -156,6 +167,37 @@ public class TimetableController {
     @PostMapping("/list")
     public String timetableListForm(Integer maxPerDay){
         configurationService.setMaxPerDay(maxPerDay.toString());
+        return "redirect:/timetable/list";
+    }
+
+    @GetMapping("/add-photo")
+    public String addPhotoView(Model model,
+                               @RequestParam(name = "id") Long id){
+        model.addAttribute("siteColor",configurationService.getStringSiteColor());
+        model.addAttribute("navIsActive","timetable");
+        model.addAttribute("footerIsActive","timetableList");
+        Timetable optional = timetableRepository.findById(id).orElse(null);
+        if( optional == null){
+            log.error("Pojawił się w widoku timetalbe/list wpis który nie istnieje");
+            return "redirect:timetable/list";
+        }
+        AddPhoto addPhoto = new AddPhoto();
+        addPhoto.setTimetable(optional);
+        addPhoto.setPictures( new Pictures());
+        model.addAttribute("addPhoto", addPhoto);
+        return "timetable-add-photo";
+    }
+
+    @PostMapping("/add-photo")
+    public String addPhoto(AddPhoto addPhoto){
+        picturesRepository.save(addPhoto.getPictures());
+        List<User> adminList = userService.getAdminListWithoutPicture(addPhoto.getPictures());
+        adminList.forEach( admin ->{
+            admin.getPictures().add(addPhoto.getPictures());
+            userRepository.save(admin);
+        });
+        addPhoto.getTimetable().setIsDone(true);
+        timetableService.addPhoto(addPhoto);
         return "redirect:/timetable/list";
     }
 }

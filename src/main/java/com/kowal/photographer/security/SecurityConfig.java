@@ -26,6 +26,7 @@ public class SecurityConfig {
                         "/timetable/list",
                         "/problem/list",
                         "/problem/resolve",
+                        "/timetable/add-photo",
                         "/page-settings").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()

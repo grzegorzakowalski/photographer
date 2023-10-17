@@ -7,13 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Entity;
+import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
     @EntityGraph( type = EntityGraph.EntityGraphType.LOAD, attributePaths = {"pictures"})
     User findUserByUsername(String username);
-    @Query("SELECT MAX(u.id) FROM User u")
-    Long findMaxId();
+    List<User> findAllByRole(String role);
 
     @EntityGraph( type = EntityGraph.EntityGraphType.LOAD, attributePaths = {"pictures"})
     User getWithPicturesByUsername(String username);

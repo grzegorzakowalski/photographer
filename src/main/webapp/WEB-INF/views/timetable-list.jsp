@@ -28,10 +28,10 @@
             </h2>
         </section>
         <section class="section">
-            <h1 class="title">Lista potwierdzonych terminów:</h1>
+            <h1 class="title">Lista potwierdzonych terminów bez dodanych zdjęć:</h1>
             <h2 class="subtitle">
                 <c:forEach items="${allConfirmed}" var="entry">
-                    <a href="${pageContext.request.contextPath}/timetable/confirm?id=${entry.id}">${entry.date} ${entry.hour}: ${entry.description}</a><br>
+                    <a href="${pageContext.request.contextPath}/timetable/add-photo?id=${entry.id}">${entry.date} ${entry.hour}: ${entry.description}</a><br>
                 </c:forEach>
             </h2>
         </section>
