@@ -17,38 +17,38 @@
     <div class="hero-body">
         <br>
         <div class="container has-text-centered">
-    <section class="section">
-        <h1 class="title">${timetable.owner.firstName}, nr tel:${timetable.owner.phoneNumber}, email: ${timetable.owner.username}</h1>
-        <h2 class="subtitle">
-            Opis:<br>
-            ${timetable.description}<br>
-            Preferowana godzina: ${timetable.hour}
-        </h2>
-    </section>
-    <form:form modelAttribute="timetable" method="post">
-        <div class="field">
-            <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Popraw opis (wymagane, ale jak opis jest według Ciebie poprawny i zrozumiały to go przekopiuj).</label>
-            <div class="control">
-                <form:input path="description" cssClass="input"/>
-            </div>
+            <section class="section">
+                <h1 class="title">${timetable.owner.firstName}, nr tel:${timetable.owner.phoneNumber}, email: ${timetable.owner.username}</h1>
+                <h2 class="subtitle">
+                    Opis:<br>
+                    ${timetable.description}<br>
+                    Preferowana godzina: ${timetable.hour}
+                </h2>
+            </section>
+            <form:form modelAttribute="timetable" method="post">
+                <div class="field">
+                    <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Popraw opis (wymagane, ale jak opis jest według Ciebie poprawny i zrozumiały to go przekopiuj).</label>
+                    <div class="control">
+                        <form:input path="description" cssClass="input"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Popraw godzinę (wymagane, ale jeżeli godzina się zgadza to ją przekopiuj).</label>
+                    <div class="control">
+                        <form:input path="hour" cssClass="input"/>
+                    </div>
+                </div>
+                <form:hidden path="owner"/>
+                <form:hidden path="date"/>
+                <form:hidden path="id"/>
+                <form:hidden path="confirmed"/>
+                <button type="submit" class="button ${siteColor} is-inverted">Zatwierdź</button>
+            </form:form>
+            <form:form method="get" modelAttribute="timetable" action="/timetable/delete">
+                <form:hidden path="id"/>
+                <button type="submit" class="button is-danger is-inverted">Usuń</button>
+            </form:form>
         </div>
-        <div class="field">
-            <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Popraw godzinę (wymagane, ale jeżeli godzina się zgadza to ją przekopiuj).</label>
-            <div class="control">
-                <form:input path="hour" cssClass="input"/>
-            </div>
-        </div>
-        <form:hidden path="owner"/>
-        <form:hidden path="date"/>
-        <form:hidden path="id"/>
-        <form:hidden path="confirmed"/>
-        <button type="submit" class="button ${siteColor} is-inverted">Zatwierdź</button>
-    </form:form>
-    <form:form method="get" modelAttribute="timetable" action="/timetable/delete">
-        <form:hidden path="id"/>
-        <button type="submit" class="button is-danger is-inverted">Usuń</button>
-    </form:form>
-</div>
     </div>
     <c:import url="footer.jsp"/>
 </section>

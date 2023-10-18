@@ -30,6 +30,7 @@ public class ConfigurationService {
         getMaxPerDay();
         getSiteColor();
         getAboutMe();
+        getContactPhoneNumber();
     }
 
     private Configuration getMaxPerDay(){
@@ -100,5 +101,46 @@ public class ConfigurationService {
         }
     }
 
+    private Configuration getContactPhoneNumber(){
+        Configuration contactPhoneNumber = configRepository.getDistinctByNameIsLike("contact_phone_number");
+        if( contactPhoneNumber == null){
+            contactPhoneNumber = new Configuration();
+            contactPhoneNumber.setName("contact_phone_number");
+            contactPhoneNumber.setValue("666-666-666");
+            configRepository.save(contactPhoneNumber);
+        }
+        return contactPhoneNumber;
+    }
+
+    public String getStringContactPhoneNumber(){
+        return getContactPhoneNumber().getValue();
+    }
+
+    public void setContactPhoneNumber(String phoneNumber){
+        Configuration contactPhoneNumber = getContactPhoneNumber();
+        contactPhoneNumber.setValue(phoneNumber);
+        configRepository.save(contactPhoneNumber);
+    }
+
+    private Configuration getContactEmail(){
+        Configuration contactEmail = configRepository.getDistinctByNameIsLike("contact_email");
+        if( contactEmail == null){
+            contactEmail = new Configuration();
+            contactEmail.setName("contact_email");
+            contactEmail.setValue("email@email.email");
+            configRepository.save(contactEmail);
+        }
+        return contactEmail;
+    }
+
+    public String getStringContactEmail(){
+        return getContactEmail().getValue();
+    }
+
+    public void setContactEmail(String email){
+        Configuration contactEmail = getContactEmail();
+        contactEmail.setValue(email);
+        configRepository.save(contactEmail);
+    }
 
 }

@@ -13,34 +13,41 @@
 <c:import url="header.jsp"/>
 <body>
 <section class="hero ${siteColor} is-fullheight">
-
     <c:import url="nav-bar.jsp"/>
-
     <div class="hero-body">
         <br>
         <div class="container has-text-centered">
-<%--            <p class="title has-text-centered">Tutaj pare słów o sobie </p>--%>
-            <form method="post">
+            <form:form method="post" modelAttribute="pageSettings">
                 <div class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Tutaj wpisz o sobie</div>
                 <div class="control">
-                    <textarea name="aboutMe" class="textarea has-fixed-size">${aboutMe}</textarea>
+                    <form:textarea path="aboutMe" cssClass="textarea has-fixed-size"/>
                 </div>
                 <br>
-                <div class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Wybierz kolor strony</div>
+                <div class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Wybierz kolor strony, aktualny: ${actualColorName}
+                </div>
                 <div class="control">
                     <div class="select is-rounded">
-                        <select name="color">
+                        <form:select path="color">
                             <c:forEach items="${colorMap}" var="color">
-                                <option value="${color.key}" <c:if test="${color.value.equals(siteColor)}">selected</c:if>>${color.key}</option>
+                                <form:option value="${color.key}">${color.key}</form:option>
                             </c:forEach>
-                        </select>
+                        </form:select>
                     </div>
                 </div>
+                <div class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Tutaj podaj kontaktowy numer telefonu</div>
+                <div class="control">
+                    <form:input path="contactPhoneNumber" cssClass="input"/>
+                </div>
+                <div class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Tutaj podaj kontaktowy adres email</div>
+                <div class="control">
+                    <form:input path="contactEmail" cssClass="input"/>
+                </div>
                 <br>
+                <form:hidden path="configurationService"/>
                 <div class="buttons is-right">
                     <button type="submit" class="button ${siteColor} is-inverted is-rounded">Potwierdź</button>
                 </div>
-            </form>
+            </form:form>
         </div>
 
     </div>

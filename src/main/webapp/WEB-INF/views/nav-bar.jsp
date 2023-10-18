@@ -18,10 +18,10 @@
                     <a href="${pageContext.request.contextPath}/"><img src="/photoLogo.png" alt="Logo" ></a>
                 </a>
                 <span class="navbar-burger" data-target="navbarMenuHeroC">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
             </div>
             <div id="navbarMenuHeroC" class="navbar-menu">
                 <div class="navbar-end">
@@ -36,24 +36,24 @@
                     </a>
                     <span class="navbar-item">
                         <div class="buttons">
-              <sec:authorize access="isAnonymous()">
-                    <a class="button ${siteColor} is-inverted" href="${pageContext.request.contextPath}/registry">
-                        <strong>Zarejestruj się</strong>
-                    </a>
-                  <a class="button ${siteColor} is-inverted" href="${pageContext.request.contextPath}/login">
-                        <strong>Zaloguj się</strong>
-                    </a>
-              </sec:authorize>
-                    <sec:authorize access="isAuthenticated()">
-                        <a class="button ${siteColor} is-inverted" href="${pageContext.request.contextPath}/panel">
-                            <strong>Twój panel</strong>
-                        </a>
-                        <a class="button ${siteColor} is-inverted" href="${pageContext.request.contextPath}/logout">
-                            Wyloguj się
-                        </a>
-                    </sec:authorize>
-                            </div>
-            </span>
+                            <sec:authorize access="isAnonymous()">
+                                <a class="button ${siteColor} is-inverted" href="${pageContext.request.contextPath}/registry">
+                                    <strong>Zarejestruj się</strong>
+                                </a>
+                                <a class="button ${siteColor} is-inverted" href="${pageContext.request.contextPath}/login">
+                                    <strong>Zaloguj się</strong>
+                                </a>
+                            </sec:authorize>
+                            <sec:authorize access="isAuthenticated()">
+                                <a class="button ${siteColor} is-inverted" href="${pageContext.request.contextPath}/panel">
+                                    <strong>Twój panel</strong>
+                                </a>
+                                <a class="button ${siteColor} is-inverted" href="${pageContext.request.contextPath}/logout">
+                                    Wyloguj się
+                                </a>
+                            </sec:authorize>
+                        </div>
+                    </span>
                 </div>
             </div>
         </div>

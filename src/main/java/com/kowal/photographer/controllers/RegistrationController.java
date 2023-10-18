@@ -2,6 +2,7 @@ package com.kowal.photographer.controllers;
 
 import com.kowal.photographer.entitys.User;
 import com.kowal.photographer.repositorys.UserRepository;
+import com.kowal.photographer.services.ConfigurationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -20,16 +21,19 @@ public class RegistrationController {
     private final PasswordEncoder passwordEncoder;
 
     private final Validator validator;
+    private final ConfigurationService configurationService;
 
-    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder, Validator validator) {
+    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder, Validator validator, ConfigurationService configurationService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.validator = validator;
+        this.configurationService = configurationService;
     }
 
     @GetMapping("/registry")
     public String registrationView(Model model){
         model.addAttribute("user", new User());
+        model.addAttribute("siteColor", configurationService.getStringSiteColor());
         return "registration";
     }
 

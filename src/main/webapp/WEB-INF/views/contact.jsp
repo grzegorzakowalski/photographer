@@ -10,20 +10,20 @@
 <html>
 <c:import url="header.jsp"/>
 <body>
-<section class="hero ${siteColor} is-fullheight">
-<c:import url="nav-bar.jsp"/>
-    <div class="hero-body">
-
-<section class="section is-large">
-    <h1 class="title">Tutaj znajdziesz dane do kontaktu.</h1>
-    <h2 class="subtitle">
-        Mój numer telefonu to: 666-666-666. Polecam kontaktować się w godzinach 14:00 - 20:00.
-        Jeżeli jednak preferujesz kontakt Email, proszę bardzo: email@Email.com.
-    </h2>
-</section>
-    </div>
-<c:import url="footer.jsp"/>
-</section>
-
+    <section class="hero ${siteColor} is-fullheight">
+    <c:import url="nav-bar.jsp"/>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <section class="section is-large">
+                    <h1 class="title">Tutaj znajdziesz dane do kontaktu.</h1>
+                    <h2 class="subtitle">
+                        Mój numer telefonu to: ${contactPhoneNumber}. Polecam kontaktować się w godzinach 14:00 - 20:00.<br>
+                        Jeżeli jednak preferujesz kontakt email, proszę bardzo: ${contactEmail}.
+                    </h2>
+                </section>
+            </div>
+        </div>
+    <c:import url="footer.jsp"/>
+    </section>
 </body>
 </html>
