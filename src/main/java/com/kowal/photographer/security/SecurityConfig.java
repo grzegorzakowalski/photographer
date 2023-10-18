@@ -22,6 +22,7 @@ public class SecurityConfig {
         return http.authorizeHttpRequests()
                 .antMatchers("/panel").hasAnyRole("USER","ADMIN")
                 .antMatchers("/timetable/confirm",
+                        "/panel/*",
                         "/timetable/delete",
                         "/timetable/list",
                         "/problem/list",

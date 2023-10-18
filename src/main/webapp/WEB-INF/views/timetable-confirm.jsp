@@ -48,7 +48,6 @@
         <form:hidden path="id"/>
         <button type="submit" class="button is-danger is-inverted">Usuń</button>
     </form:form>
-
 </div>
     </div>
     <c:import url="footer.jsp"/>

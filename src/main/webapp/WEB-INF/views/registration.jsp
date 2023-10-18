@@ -28,7 +28,6 @@
                 <p class="help is-danger">Podaj poprawny adres email</p>
             </c:if>
         </c:forEach>
-
     </div>
     <div class="field">
         <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Hasło</label>

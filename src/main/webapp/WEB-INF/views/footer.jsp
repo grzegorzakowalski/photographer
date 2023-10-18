@@ -53,3 +53,17 @@
         </nav>
     </div>
 </c:if>
+<c:if test="${navIsActive.equals('panel')}">
+    <div class="hero-foot">
+        <nav class="tabs is-boxed is-fullwidth">
+            <div class="container">
+                <ul>
+                    <li class="<c:if test="${footerIsActive.equals('panel')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/panel">Twój panel</a></li>
+                    <sec:authorize access="hasRole('ADMIN')">
+                        <li class="<c:if test="${footerIsActive.equals('userControl')}">is-active</c:if>"><a href="${pageContext.request.contextPath}/panel/user-control">Kontrola kont</a></li>
+                    </sec:authorize>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</c:if>
