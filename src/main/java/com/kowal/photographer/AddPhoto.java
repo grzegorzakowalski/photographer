@@ -5,6 +5,9 @@ import com.kowal.photographer.entitys.Timetable;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * Klasa, która przetrzymuje encje Timetable i Pictures.
+ */
 @Data
 @ToString
 public class AddPhoto {

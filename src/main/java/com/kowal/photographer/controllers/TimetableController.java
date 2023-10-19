@@ -57,7 +57,6 @@ public class TimetableController {
         model.addAttribute("siteColor",configurationService.getStringSiteColor());
         model.addAttribute("navIsActive","timetable");
         model.addAttribute("footerIsActive","timetable");
-
         LocalDate actualDate = LocalDate.now().plusMonths(shift);
         MonthService monthService = new MonthService(actualDate);
         Month month = new Month(actualDate);
@@ -82,7 +81,6 @@ public class TimetableController {
         model.addAttribute("siteColor",configurationService.getStringSiteColor());
         model.addAttribute("navIsActive","timetable");
         model.addAttribute("footerIsActive","timetable");
-
         Timetable timetable = new Timetable();
         timetable.setOwner( currentUser != null ? currentUser.getUser() : userService.getTempUser());
         timetable.setDate( LocalDate.of(year, month, day));
@@ -111,7 +109,6 @@ public class TimetableController {
         model.addAttribute("siteColor",configurationService.getStringSiteColor());
         model.addAttribute("navIsActive","timetable");
         model.addAttribute("footerIsActive","timetableList");
-
         if(byId.isEmpty()){
             return "/panel";
         }
@@ -119,6 +116,7 @@ public class TimetableController {
         model.addAttribute("timetable", timetable);
         return "timetable-confirm";
     }
+
     @PostMapping("/confirm")
     public String confirmTimetable(Timetable timetable, Model model){
         Set<ConstraintViolation<Timetable>> validate = validator.validate(timetable);
@@ -141,7 +139,7 @@ public class TimetableController {
             model.addAttribute("timetable", optional.get());
             return "timetable-delete-confirmation";
         }
-        return "redirect:/timetable/list?msg=delete-error"; // dodaj error
+        return "redirect:/timetable/list?msg=delete-error";
     }
 
     @PostMapping("/delete")
@@ -161,7 +159,6 @@ public class TimetableController {
         model.addAttribute("msg",msg);
         model.addAttribute("maxPerDay",configurationService.getIntegerMaxPerDay());
         return "timetable-list";
-
     }
 
     @PostMapping("/list")
@@ -190,13 +187,6 @@ public class TimetableController {
 
     @PostMapping("/add-photo")
     public String addPhoto(AddPhoto addPhoto){
-        picturesRepository.save(addPhoto.getPictures());
-        List<User> adminList = userService.getAdminListWithoutPicture(addPhoto.getPictures());
-        adminList.forEach( admin ->{
-            admin.getPictures().add(addPhoto.getPictures());
-            userRepository.save(admin);
-        });
-        addPhoto.getTimetable().setIsDone(true);
         timetableService.addPhoto(addPhoto);
         return "redirect:/timetable/list";
     }

@@ -8,16 +8,15 @@ import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Serwis zajmujący się obsługą galerii
+ */
 @Service
 public class GaleryService {
     private final GaleryRepository galeryRepository;
 
     public GaleryService(GaleryRepository galeryRepository) {
         this.galeryRepository = galeryRepository;
-    }
-
-    public Galery findById(Long id){
-        return galeryRepository.getReferenceById(id);
     }
 
     public void add(Galery galery){
@@ -32,6 +31,9 @@ public class GaleryService {
         return galeryRepository.findAll();
     }
 
+    /**
+     * @return Wszystkie zdjęcia w galerii podzielone na 2 listy (na pół)
+     */
     public List<List<Galery>> FindAllAndSplitInHalf(){
         List<List<Galery>> result = new ArrayList<>();
         List<Galery> all = findAll();

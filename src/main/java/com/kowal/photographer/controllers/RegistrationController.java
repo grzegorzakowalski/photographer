@@ -19,7 +19,6 @@ import java.util.Set;
 public class RegistrationController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
     private final Validator validator;
     private final ConfigurationService configurationService;
 
@@ -50,5 +49,4 @@ public class RegistrationController {
         userRepository.save(user);
         return "/login";
     }
-
 }

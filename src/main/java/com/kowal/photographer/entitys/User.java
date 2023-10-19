@@ -1,13 +1,15 @@
 package com.kowal.photographer.entitys;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Encja użytkowników
+ */
 @Entity
 @Data
 @Table(name = "users")
@@ -18,7 +20,7 @@ public class User {
     @Column(nullable = false, unique = true)
     @NotBlank
     @Email
-    private String username;// email!
+    private String username;// Email jest nazwą użytkownika
     @Column(nullable = false)
     @NotBlank
     private String password;
@@ -31,8 +33,6 @@ public class User {
     private Boolean active;
     @Column(name = "first_name")
     private String firstName;
-
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Pictures> pictures = new ArrayList<>();
-
 }

@@ -18,6 +18,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Metoda tworząca tymczasowego użytkownika. Encja timetable musi posiadać użytkownika nie ważne, czy jest się zalogowanym, czy nie.
+     * @return użytkownika, który wymaga dodania numeru telefonu i emaila.
+     */
     public User getTempUser(){
         User user = new User();
         user.setFirstName("Anon");
@@ -27,6 +31,11 @@ public class UserService {
         return user;
     }
 
+    /**
+     * Zwraca listę adminów, którzy nie posiadają powiązania z podanym elementem bazy danych pictures.
+     * @param picture element z bazy danych pictures.
+     * @return Listę użytkowników z rolą admin bez powiązania z parametrem.
+     */
     public List<User> getAdminListWithoutPicture(Pictures picture){
         List<User> roleAdmin = userRepository.findAllByRole("ROLE_ADMIN");
         return roleAdmin.stream()

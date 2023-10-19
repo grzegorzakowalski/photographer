@@ -4,6 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * Encja trzymająca linki wraz z opisami do zdjęć z sesji zdjęciowych
+ */
 @Entity
 @Data
 public class Pictures {

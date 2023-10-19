@@ -45,7 +45,6 @@ public class ProblemController {
         model.addAttribute("footerIsActive","problemList");
         model.addAttribute("issues", issueRepository.findAllByResolved(false));
         return "problem-list";
-
     }
 
     @PostMapping("/resolve")

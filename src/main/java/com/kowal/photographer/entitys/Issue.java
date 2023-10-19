@@ -6,6 +6,9 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+/**
+ * Encja przechowująca zgłoszone problemu przez użytkowników
+ */
 @Entity
 @Table(name = "issues")
 @ToString

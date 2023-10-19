@@ -14,22 +14,24 @@
 <section class="hero ${siteColor} is-fullheight">
   <c:import url="nav-bar.jsp"/>
   <div class="hero-body">
-    <form:form method="post" modelAttribute="addPhoto">
-      <div class="field">
-        <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Poniżej wstaw link do zdjęć</label>
-        <div class="control">
-          <form:input path="pictures.link" cssClass="input"/>
+    <div class="container has-text-centered">
+      <form:form method="post" modelAttribute="addPhoto">
+        <div class="field">
+          <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Poniżej wstaw link do zdjęć</label>
+          <div class="control">
+            <form:input path="pictures.link" cssClass="input" cssStyle="width: 25%"/>
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Tutaj krótki opis sesji</label>
-        <div class="control">
-          <form:input path="pictures.description" cssClass="input"/>
+        <div class="field">
+          <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Tutaj krótki opis sesji</label>
+          <div class="control">
+            <form:input path="pictures.description" cssClass="input" cssStyle="width: 25%"/>
+          </div>
         </div>
-      </div>
-      <form:hidden path="timetable"/>
-      <button type="submit" class="button ${siteColor} is-inverted">Potwierdź</button>
-    </form:form>
+        <form:hidden path="timetable"/>
+        <button type="submit" class="button ${siteColor} is-inverted">Potwierdź</button>
+      </form:form>
+    </div>
   </div>
   <c:import url="footer.jsp"/>
 </section>

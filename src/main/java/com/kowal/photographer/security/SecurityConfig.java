@@ -7,16 +7,12 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.beans.BeanProperty;
-
 @Configuration
 public class SecurityConfig {
-
     @Bean
     protected PasswordEncoder passwordEncoder(){
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
-
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception{
         return http.authorizeHttpRequests()

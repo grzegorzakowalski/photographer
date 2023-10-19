@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.util.Set;
 @Service
 public class AuthService implements UserDetailsService {
@@ -25,6 +24,4 @@ public class AuthService implements UserDetailsService {
         }
         return new CurrentUser(user.getUsername(), user.getPassword(), Set.of(new SimpleGrantedAuthority(user.getRole())), userRepository, user);
     }
-
-
 }

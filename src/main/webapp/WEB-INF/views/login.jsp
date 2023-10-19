@@ -30,7 +30,7 @@
                     </div>
                     <div class="field is-grouped-right">
                         <div class="control">
-                            <button class="button is-link" type="submit">Submit</button>
+                            <button class="button ${siteColor} is-inverted" type="submit">Submit</button>
                         </div>
                     </div>
                 </form>

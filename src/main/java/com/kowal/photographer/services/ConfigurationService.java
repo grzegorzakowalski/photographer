@@ -10,11 +10,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+
+/**
+ * Serwis zajmujący się obsługą konfiguracji.
+ */
 @Slf4j
 @Service
 @ToString
 public class ConfigurationService {
+
     private final ConfigRepository configRepository;
+
     @Getter
     Map<String,String> colorMap;
 
@@ -29,26 +35,14 @@ public class ConfigurationService {
         colorMap.put("darkGreen","is-primary");
     }
 
+    /**
+     * Metoda tworząca galerie w wypadku kiedy jej nie ma
+     */
     public void checkConfigurationIfEmptyCreate(){
         getMaxPerDay();
         getSiteColor();
         getAboutMe();
         getContactPhoneNumber();
-    }
-
-    private Configuration getMaxPerDay(){
-        Configuration maxPerDay = configRepository.getDistinctByNameIsLike("max_per_day");
-        if( maxPerDay == null){
-            maxPerDay = new Configuration();
-            maxPerDay.setName("max_per_day");
-            maxPerDay.setValue("3");
-            configRepository.save(maxPerDay);
-        }
-        return maxPerDay;
-    }
-
-    public Integer getIntegerMaxPerDay(){
-        return Integer.parseInt(getMaxPerDay().getValue());
     }
 
     private Configuration getSiteColor(){
@@ -62,14 +56,40 @@ public class ConfigurationService {
         return siteColor;
     }
 
+    public void setSiteColor(String color){
+        Configuration c = getSiteColor();
+        String colorFromMap = colorMap.get(color);
+        if( colorFromMap == null){
+            log.error("{} isn't correct color", color);
+        } else {
+            c.setValue(colorFromMap);
+            configRepository.save(c);
+        }
+    }
+
     public String getStringSiteColor(){
         return getSiteColor().getValue();
+    }
+
+    private Configuration getMaxPerDay(){
+        Configuration maxPerDay = configRepository.getDistinctByNameIsLike("max_per_day");
+        if( maxPerDay == null){
+            maxPerDay = new Configuration();
+            maxPerDay.setName("max_per_day");
+            maxPerDay.setValue("3");
+            configRepository.save(maxPerDay);
+        }
+        return maxPerDay;
     }
 
     public void setMaxPerDay(String maxPerDay){
         Configuration c = getMaxPerDay();
         c.setValue(maxPerDay);
         configRepository.save(c);
+    }
+
+    public Integer getIntegerMaxPerDay(){
+        return Integer.parseInt(getMaxPerDay().getValue());
     }
 
     private Configuration getAboutMe(){
@@ -83,25 +103,14 @@ public class ConfigurationService {
         return aboutMe;
     }
 
-    public String getStringAboutMe(){
-        return getAboutMe().getValue();
-    }
-
     public void setAboutMe(String inputText){
         Configuration c = getAboutMe();
         c.setValue(inputText);
         configRepository.save(c);
     }
 
-    public void setSiteColor(String color){
-        Configuration c = getSiteColor();
-        String colorFromMap = colorMap.get(color);
-        if( colorFromMap == null){
-            log.error("{} isn't correct color", color);
-        } else {
-            c.setValue(colorFromMap);
-            configRepository.save(c);
-        }
+    public String getStringAboutMe(){
+        return getAboutMe().getValue();
     }
 
     private Configuration getContactPhoneNumber(){
@@ -115,14 +124,14 @@ public class ConfigurationService {
         return contactPhoneNumber;
     }
 
-    public String getStringContactPhoneNumber(){
-        return getContactPhoneNumber().getValue();
-    }
-
     public void setContactPhoneNumber(String phoneNumber){
         Configuration contactPhoneNumber = getContactPhoneNumber();
         contactPhoneNumber.setValue(phoneNumber);
         configRepository.save(contactPhoneNumber);
+    }
+
+    public String getStringContactPhoneNumber(){
+        return getContactPhoneNumber().getValue();
     }
 
     private Configuration getContactEmail(){
@@ -136,16 +145,19 @@ public class ConfigurationService {
         return contactEmail;
     }
 
-    public String getStringContactEmail(){
-        return getContactEmail().getValue();
-    }
-
     public void setContactEmail(String email){
         Configuration contactEmail = getContactEmail();
         contactEmail.setValue(email);
         configRepository.save(contactEmail);
     }
 
+    public String getStringContactEmail(){
+        return getContactEmail().getValue();
+    }
+
+    /**
+     * Metoda zwracająca konfigurację w postaci obiektu klasy PageSettings.
+     */
     public PageSettings getPageSettings(){
         PageSettings pageSettings = new PageSettings();
         pageSettings.setAboutMe(getStringAboutMe());
@@ -155,11 +167,14 @@ public class ConfigurationService {
         return pageSettings;
     }
 
+    /**
+     * Metoda zapisująca ustawienia do bazy danych z obiektu klasy PageSettings.
+     * @param pageSettings
+     */
     public void savePageSettings(PageSettings pageSettings){
         setAboutMe(pageSettings.getAboutMe());
         setSiteColor(pageSettings.getSiteColor());
         setContactEmail(pageSettings.getContactEmail());
         setContactPhoneNumber(pageSettings.getContactPhoneNumber());
     }
-
 }

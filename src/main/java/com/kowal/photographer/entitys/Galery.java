@@ -4,6 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * Encja będąca elementami galerii
+ */
 @Entity
 @Table(name = "galery")
 @Data

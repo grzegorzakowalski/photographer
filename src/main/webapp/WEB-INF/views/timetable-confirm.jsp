@@ -27,13 +27,13 @@
             </section>
             <form:form modelAttribute="timetable" method="post">
                 <div class="field">
-                    <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Popraw opis (wymagane, ale jak opis jest według Ciebie poprawny i zrozumiały to go przekopiuj).</label>
+                    <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Popraw opis, jeżeli istnieje taka potrzeba (pole wymagane).</label>
                     <div class="control">
                         <form:input path="description" cssClass="input"/>
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Popraw godzinę (wymagane, ale jeżeli godzina się zgadza to ją przekopiuj).</label>
+                    <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Popraw godzinę, jeżeli istnieje taka potrzeba (pole wymagane).</label>
                     <div class="control">
                         <form:input path="hour" cssClass="input"/>
                     </div>
@@ -42,6 +42,7 @@
                 <form:hidden path="date"/>
                 <form:hidden path="id"/>
                 <form:hidden path="confirmed"/>
+                <form:hidden path="isDone"/>
                 <button type="submit" class="button ${siteColor} is-inverted">Zatwierdź</button>
             </form:form>
             <form:form method="get" modelAttribute="timetable" action="/timetable/delete">

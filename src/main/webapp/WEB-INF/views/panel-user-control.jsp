@@ -16,7 +16,6 @@
     <br>
     <section class="section">
       <h1 class="title">
-        Ważne!!! Jeżeli wejdziesz w edycje konta (naciśniesz na jego dane), musisz ustawić nowe hasło!!!<br>
         Lista użytkowników:
       </h1>
       <h2 class="subtitle">

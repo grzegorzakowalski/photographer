@@ -29,7 +29,6 @@ public class PanelController {
     private final UserRepository userRepository;
     private final Validator validator;
     public PanelController(ConfigurationService configurationService, PasswordEncoder passwordEncoder, UserRepository userRepository, Validator validator) {
-
         this.configurationService = configurationService;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
@@ -43,6 +42,7 @@ public class PanelController {
         model.addAttribute("user", currentUser.getUser());
         model.addAttribute("navIsActive", "panel");
         model.addAttribute("footerIsActive", "panel");
+        // dodaj wyświetlanie twoich terminów
         return "panel";
     }
 
@@ -92,7 +92,6 @@ public class PanelController {
         if(!validated.isEmpty()){
             return "redirect:/panel/change-user?id=" + user.getId() + "&error=true";
         }
-
         userRepository.save(user);
         return "redirect:/panel/user-control";
     }
