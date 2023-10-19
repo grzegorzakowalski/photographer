@@ -1,8 +1,10 @@
 package com.kowal.photographer.services;
 
+import com.kowal.photographer.PageSettings;
 import com.kowal.photographer.entitys.Configuration;
 import com.kowal.photographer.repositorys.ConfigRepository;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 @Slf4j
 @Service
+@ToString
 public class ConfigurationService {
     private final ConfigRepository configRepository;
     @Getter
@@ -141,6 +144,22 @@ public class ConfigurationService {
         Configuration contactEmail = getContactEmail();
         contactEmail.setValue(email);
         configRepository.save(contactEmail);
+    }
+
+    public PageSettings getPageSettings(){
+        PageSettings pageSettings = new PageSettings();
+        pageSettings.setAboutMe(getStringAboutMe());
+        pageSettings.setSiteColor(getStringSiteColor());
+        pageSettings.setContactEmail(getStringContactEmail());
+        pageSettings.setContactPhoneNumber(getStringContactPhoneNumber());
+        return pageSettings;
+    }
+
+    public void savePageSettings(PageSettings pageSettings){
+        setAboutMe(pageSettings.getAboutMe());
+        setSiteColor(pageSettings.getSiteColor());
+        setContactEmail(pageSettings.getContactEmail());
+        setContactPhoneNumber(pageSettings.getContactPhoneNumber());
     }
 
 }

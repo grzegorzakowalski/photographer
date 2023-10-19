@@ -12,11 +12,9 @@ import java.util.Map;
 @Controller
 public class HomeController {
     private final ConfigurationService configurationService;
-    private PageSettings pageSettings;
 
-    public HomeController(ConfigurationService configurationService, PageSettings pageSettings) {
+    public HomeController(ConfigurationService configurationService) {
         this.configurationService = configurationService;
-        this.pageSettings = pageSettings;
     }
 
     @GetMapping
@@ -31,11 +29,12 @@ public class HomeController {
 
     @GetMapping("/page-settings")
     public String pageSettingsView(Model model){
+        PageSettings pageSettings = configurationService.getPageSettings();
         model.addAttribute("pageSettings", pageSettings);
-        model.addAttribute("siteColor", pageSettings.getColor());
+        model.addAttribute("siteColor", pageSettings.getSiteColor());
         model.addAttribute("colorMap", configurationService.getColorMap());
         model.addAttribute("actualColorName", configurationService.getColorMap().entrySet().stream()
-                .filter(entry -> pageSettings.getColor().equals(entry.getValue()))
+                .filter(entry -> pageSettings.getSiteColor().equals(entry.getValue()))
                 .findFirst()
                 .orElse( Map.entry("lipa","nie działa")).getKey());
         model.addAttribute("navIsActive","home");
@@ -45,7 +44,7 @@ public class HomeController {
 
     @PostMapping("/page-settings")
     public String pageSettings(PageSettings pageSettings){
-        pageSettings.save();
+        configurationService.savePageSettings(pageSettings);
         return "redirect:/page-settings";
 
     }
