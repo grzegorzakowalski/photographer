@@ -20,8 +20,7 @@ public class ContactController {
         model.addAttribute("siteColor",configurationService.getStringSiteColor());
         model.addAttribute("navIsActive","timetable");
         model.addAttribute("footerIsActive","contact");
-        model.addAttribute("contactPhoneNumber",configurationService.getStringContactPhoneNumber());
-        model.addAttribute("contactEmail",configurationService.getStringContactEmail());
+        model.addAttribute("pageSettings", configurationService.getPageSettings());
         return "contact";
     }
 }

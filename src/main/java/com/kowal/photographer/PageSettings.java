@@ -11,5 +11,5 @@ public class PageSettings {
     private String siteColor;
     private String contactPhoneNumber;
     private String contactEmail;
-
+    private String contactHours;
 }

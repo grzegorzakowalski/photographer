@@ -17,8 +17,8 @@
                 <section class="section is-large">
                     <h1 class="title">Tutaj znajdziesz dane do kontaktu.</h1>
                     <h2 class="subtitle">
-                        Mój numer telefonu to: ${contactPhoneNumber}. Polecam kontaktować się w godzinach 14:00 - 20:00.<br>
-                        Jeżeli jednak preferujesz kontakt email, proszę bardzo: ${contactEmail}.
+                        Mój numer telefonu to: ${pageSettings.contactPhoneNumber}. Polecam kontaktować się w godzinach ${pageSettings.contactHours}.<br>
+                        Jeżeli jednak preferujesz kontakt email, proszę bardzo: ${pageSettings.contactEmail}.
                     </h2>
                 </section>
             </div>

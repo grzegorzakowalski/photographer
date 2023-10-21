@@ -43,16 +43,18 @@
                     <form:input path="contactEmail" cssClass="input"/>
                 </div>
                 <br>
+                <div class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Tutaj podaj przedział czasowy, w którym akceptujesz rozmowy telefoniczne</div>
+                <div class="control">
+                    <form:input path="contactHours" cssClass="input"/>
+                </div>
+                <br>
                 <div class="buttons is-right">
                     <button type="submit" class="button ${siteColor} is-inverted is-rounded">Potwierdź</button>
                 </div>
             </form:form>
         </div>
-
     </div>
-
     <c:import url="footer.jsp"/>
-
 </section>
 </body>
 </html>

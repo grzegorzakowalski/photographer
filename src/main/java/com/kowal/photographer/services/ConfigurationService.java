@@ -44,6 +44,7 @@ public class ConfigurationService {
         getSiteColor();
         getAboutMe();
         getContactPhoneNumber();
+        getContactHours();
     }
 
     private Configuration getSiteColor(){
@@ -163,6 +164,27 @@ public class ConfigurationService {
         return getContactEmail().getValue();
     }
 
+    private Configuration getContactHours(){
+        Configuration contactHours = configRepository.getDistinctByNameIsLike("contact_hours");
+        if( contactHours == null){
+            contactHours = new Configuration();
+            contactHours.setName("contact_hours");
+            contactHours.setValue("08:00 - 20:00");
+            configRepository.save(contactHours);
+        }
+        return contactHours;
+    }
+
+    public void setContactHours(String hours){
+        Configuration contactHours = getContactHours();
+        contactHours.setValue(hours);
+        configRepository.save(contactHours);
+    }
+
+    public String getStringContactHours(){
+        return getContactHours().getValue();
+    }
+
     /**
      * Method returns full configuration as PageSettings object.
      * @return PageSettings object.
@@ -174,6 +196,7 @@ public class ConfigurationService {
         pageSettings.setSiteColor(getStringSiteColor());
         pageSettings.setContactEmail(getStringContactEmail());
         pageSettings.setContactPhoneNumber(getStringContactPhoneNumber());
+        pageSettings.setContactHours(getStringContactHours());
         return pageSettings;
     }
 
@@ -186,5 +209,6 @@ public class ConfigurationService {
         setSiteColor(pageSettings.getSiteColor() == null ? getStringSiteColor() : pageSettings.getSiteColor());
         setContactEmail(pageSettings.getContactEmail() == null ? getStringContactEmail() : pageSettings.getContactEmail());
         setContactPhoneNumber(pageSettings.getContactPhoneNumber() == null ? getStringContactPhoneNumber() : pageSettings.getContactPhoneNumber());
+        setContactHours(pageSettings.getContactHours() == null ? getStringContactHours() : pageSettings.getContactHours());
     }
 }
