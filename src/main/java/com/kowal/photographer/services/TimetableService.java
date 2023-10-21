@@ -1,8 +1,8 @@
 package com.kowal.photographer.services;
 
 import com.kowal.photographer.AddPhoto;
-import com.kowal.photographer.entitys.Timetable;
-import com.kowal.photographer.entitys.User;
+import com.kowal.photographer.entities.Timetable;
+import com.kowal.photographer.entities.User;
 import com.kowal.photographer.repositorys.PicturesRepository;
 import com.kowal.photographer.repositorys.TimetableRepository;
 import com.kowal.photographer.repositorys.UserRepository;
@@ -14,7 +14,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Serwis zajmujący się obsługą terminów na sesję zdjęciową.
+ * Service operating on timetable
  */
 @Service
 public class TimetableService {
@@ -22,18 +22,20 @@ public class TimetableService {
     private final UserRepository userRepository;
     private final UserService userService;
     private final PicturesRepository picturesRepository;
+    private final ConfigurationService configurationService;
 
-    public TimetableService(TimetableRepository timetableRepository, UserRepository userRepository, UserService userService, PicturesRepository picturesRepository) {
+    public TimetableService(TimetableRepository timetableRepository, UserRepository userRepository, UserService userService, PicturesRepository picturesRepository, ConfigurationService configurationService) {
         this.timetableRepository = timetableRepository;
         this.userRepository = userRepository;
         this.userService = userService;
         this.picturesRepository = picturesRepository;
+        this.configurationService = configurationService;
     }
 
     /**
-     * Dodaje termin podany jako parametr do bazy danych.
-     * @param entity
-     * @return true, jeżeli udało się dodać termin do bazy. False w wypadku gdy istnieje już termin o tym id w bazie.
+     * Add timetable to db. It only adds, can't update.
+     * @param entity which you want to add
+     * @return true if operation was successfully executed, false otherwise.
      */
     public Boolean add(Timetable entity){
         if( entity.getId() != null){
@@ -47,12 +49,12 @@ public class TimetableService {
     }
 
     /**
-     * Metoda zwracająca listę dni, w których ilość dostępnych terminów jest już pełna.
-     * @param localDate  parametr potrzebny, aby wydobyć miesiąc, na którym ma być użyta metoda
-     * @param maxSize  maksymalna ilość terminów w dniu 
-     * @return listę, która ma w sobie wszystkie dni danego miesiąca. Wartość true dla dni, które posiadają pełną ilość terminów, false w innym przypadku.
+     * Method sets up list of bool for days of given month, where true means that day is full, and you can't book more meetings.
+     * @param localDate param with month you want to operate.
+     * @return Boolean list where true means day is full
      */
-    public List<Boolean> getUnavailableListForMonth(LocalDate localDate, Integer maxSize){
+    public List<Boolean> getUnavailableListForMonth(LocalDate localDate){
+        Integer maxSize = configurationService.getIntegerMaxPerDay();
         List<Boolean> result = new ArrayList<>();
         MonthService monthService = new MonthService(localDate);
         for (int i = 1; i <= monthService.getMonthLength(); i++){
@@ -65,10 +67,10 @@ public class TimetableService {
         return result;
     }
 
-    /** Metoda zwraca listę terminów, które nie mają dodanych zdjęć w zależności czy są potwierdzone, czy nie.
-     * 
-     * @param isConfirmed  czy sesja zdjęciowa została już potwierdzona przez fotografa 
-     * @return Listę terminów spełniających warunki.
+    /**
+     * Method returns list of timetables that are still to go. Whither it is confirmed or not.
+     * @param isConfirmed  is session confirmed by photographer or no.
+     * @return list of timetables that meet circumstances.
      */
     public List<Timetable> getNotDoneListByConfirmed(boolean isConfirmed){
         List<Timetable> allByConfirmed = timetableRepository.findAllByConfirmed(isConfirmed);
@@ -78,9 +80,9 @@ public class TimetableService {
                 .toList();
     }
 
-    /** Metoda dodaje zdjęcia do sesji zdjęciowej.
+    /** Method adds pictures to timetable using AddPhoto object. Object from this class contains proper saved timetable entity, and new photo entity which doesn't matter is it saved or not.
      *
-     * @param addPhoto  obiekt przetrzymujący elementy encji Timetable i Pictures
+     * @param addPhoto object containing two entities: timetable, and pictures.
      */
     public void addPhoto(AddPhoto addPhoto){
         picturesRepository.save(addPhoto.getPictures());

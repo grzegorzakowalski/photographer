@@ -5,18 +5,18 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * Klasa reprezentująca dzień tygodnia.
+ * Class that represents day of week
  */
 @AllArgsConstructor
 @Data
 @ToString
 public class Day {
     /**
-     * Numer dnia w tygodniu
+     * Weekday number
      */
     private int dayOfWeekNumber;
     /**
-     * Numer dnia w miesiącu
+     * Day of the month
      */
     private int dateNumber;
 

@@ -39,9 +39,9 @@
             <c:forEach items="${myMonth.listOfWeeks}" varStatus="i">
             <tr>
                 <c:forEach begin="0" end="6" varStatus="j">
-                    <c:set var="actualDayOfMonth" value="${((i.index) * 7) + (j.index + 1) - firstDayOfMonth + 1}"/>
+                    <c:set var="actualDayOfMonth" value="${((i.index) * 7) + (j.index + 1) - myMonth.firstDay + 1}"/>
                     <td>
-                        <c:if test="${actualDayOfMonth > 0 && actualDayOfMonth <= lastDayOfMonth}">
+                        <c:if test="${actualDayOfMonth > 0 && actualDayOfMonth <= myMonth.length}">
                             <c:choose>
                                 <c:when test="${!allUnavailable.get(actualDayOfMonth - 1)}">
                                     <p style="font-size: 1.25rem" class="is-selected"><strong class="">${actualDayOfMonth}.<c:if test="${actualDayOfMonth < 10}">&nbsp;&nbsp;</c:if></strong> <a href="/timetable/add?day=${actualDayOfMonth}&month=${month}&year=${year}">Zarezerwuj termin</a>
@@ -72,12 +72,6 @@
             </p>
         </div>
     </form>
-<%--        <section class="section">--%>
-<%--            <h1 class="title">Uwaga!</h1>--%>
-<%--            <h2 class="subtitle">--%>
-<%--                Jeżeli nie ma wolnych terminów danego dnia, zawsze można spróbować kontaktu telefonicznego, albo poprzez Email.--%>
-<%--            </h2>--%>
-<%--        </section>--%>
 </div>
 </div>
 <c:import url="footer.jsp"/>

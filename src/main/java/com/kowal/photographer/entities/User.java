@@ -1,4 +1,4 @@
-package com.kowal.photographer.entitys;
+package com.kowal.photographer.entities;
 
 import lombok.Data;
 import javax.persistence.*;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Encja użytkowników
+ * Entity representing users
  */
 @Entity
 @Data

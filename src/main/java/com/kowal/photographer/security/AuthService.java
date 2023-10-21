@@ -1,6 +1,6 @@
 package com.kowal.photographer.security;
 
-import com.kowal.photographer.entitys.User;
+import com.kowal.photographer.entities.User;
 import com.kowal.photographer.repositorys.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

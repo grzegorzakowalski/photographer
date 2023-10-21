@@ -1,6 +1,6 @@
 package com.kowal.photographer.controllers;
 
-import com.kowal.photographer.entitys.User;
+import com.kowal.photographer.entities.User;
 import com.kowal.photographer.repositorys.UserRepository;
 import com.kowal.photographer.services.ConfigurationService;
 import lombok.extern.slf4j.Slf4j;

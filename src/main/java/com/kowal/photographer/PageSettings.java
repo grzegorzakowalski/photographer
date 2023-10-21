@@ -3,7 +3,7 @@ package com.kowal.photographer;
 import lombok.Data;
 
 /**
- * Klasa trzymająca w sobie wszystkie ustawienia strony.
+ * Class holding site configuration.
  */
 @Data
 public class PageSettings {

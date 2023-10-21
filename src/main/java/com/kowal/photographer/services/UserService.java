@@ -1,7 +1,7 @@
 package com.kowal.photographer.services;
 
-import com.kowal.photographer.entitys.Pictures;
-import com.kowal.photographer.entitys.User;
+import com.kowal.photographer.entities.Pictures;
+import com.kowal.photographer.entities.User;
 import com.kowal.photographer.repositorys.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,8 +19,8 @@ public class UserService {
     }
 
     /**
-     * Metoda tworząca tymczasowego użytkownika. Encja timetable musi posiadać użytkownika nie ważne, czy jest się zalogowanym, czy nie.
-     * @return użytkownika, który wymaga dodania numeru telefonu i emaila.
+     * Method returns temp user to farther link with timetable.
+     * @return user who is almost ready to save just needs phone number and email to be set.
      */
     public User getTempUser(){
         User user = new User();
@@ -32,9 +32,9 @@ public class UserService {
     }
 
     /**
-     * Zwraca listę adminów, którzy nie posiadają powiązania z podanym elementem bazy danych pictures.
-     * @param picture element z bazy danych pictures.
-     * @return Listę użytkowników z rolą admin bez powiązania z parametrem.
+     * Returns list of admins who don't have relation with given picture
+     * @param picture to exclude admins.
+     * @return list of USER_ADMIN who aren't related to param.
      */
     public List<User> getAdminListWithoutPicture(Pictures picture){
         List<User> roleAdmin = userRepository.findAllByRole("ROLE_ADMIN");

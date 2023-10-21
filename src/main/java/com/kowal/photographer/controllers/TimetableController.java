@@ -2,15 +2,13 @@ package com.kowal.photographer.controllers;
 
 import com.kowal.photographer.AddPhoto;
 import com.kowal.photographer.Month;
-import com.kowal.photographer.entitys.Pictures;
-import com.kowal.photographer.entitys.Timetable;
-import com.kowal.photographer.entitys.User;
+import com.kowal.photographer.entities.Pictures;
+import com.kowal.photographer.entities.Timetable;
 import com.kowal.photographer.repositorys.PicturesRepository;
 import com.kowal.photographer.repositorys.TimetableRepository;
 import com.kowal.photographer.repositorys.UserRepository;
 import com.kowal.photographer.security.CurrentUser;
 import com.kowal.photographer.services.ConfigurationService;
-import com.kowal.photographer.services.MonthService;
 import com.kowal.photographer.services.TimetableService;
 import com.kowal.photographer.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,11 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -39,8 +35,6 @@ public class TimetableController {
     private final Validator validator;
     private final ConfigurationService configurationService;
     private final TimetableRepository timetableRepository;
-    private final UserRepository userRepository;
-    private final PicturesRepository picturesRepository;
 
     public TimetableController(TimetableService timetableService, UserService userService, TimetableRepository timetableRepository, Validator validator, ConfigurationService configurationService, UserRepository userRepository, PicturesRepository picturesRepository) {
         this.timetableService = timetableService;
@@ -48,23 +42,16 @@ public class TimetableController {
         this.configurationService = configurationService;
         this.timetableRepository = timetableRepository;
         this.validator = validator;
-        this.userRepository = userRepository;
-        this.picturesRepository = picturesRepository;
     }
 
     @GetMapping
-    public String timetableView(Model model, @RequestParam(name = "shift", defaultValue = "0") Integer shift, HttpSession session){
+    public String timetableView(Model model, @RequestParam(name = "shift", defaultValue = "0") Integer shift){
         model.addAttribute("siteColor",configurationService.getStringSiteColor());
         model.addAttribute("navIsActive","timetable");
         model.addAttribute("footerIsActive","timetable");
         LocalDate actualDate = LocalDate.now().plusMonths(shift);
-        MonthService monthService = new MonthService(actualDate);
         Month month = new Month(actualDate);
-        Integer maxSize = configurationService.getIntegerMaxPerDay();
-        model.addAttribute("maxSize", maxSize);
-        model.addAttribute("firstDayOfMonth", monthService.getFirstDayAsNumberOfWeekDay());
-        model.addAttribute("lastDayOfMonth", monthService.getMonthLength());
-        model.addAttribute("allUnavailable", timetableService.getUnavailableListForMonth(actualDate, maxSize));
+        model.addAttribute("allUnavailable", timetableService.getUnavailableListForMonth(actualDate));
         model.addAttribute("shift", shift);
         model.addAttribute("month", actualDate.getMonth().getValue());
         model.addAttribute("year", actualDate.getYear());
@@ -145,7 +132,7 @@ public class TimetableController {
     @PostMapping("/delete")
     public String deleteTimetable(Timetable timetable){
         timetableRepository.delete(timetable);
-        return "redirect:/panel";
+        return "redirect:/timetable/list";
     }
 
     @GetMapping("/list")

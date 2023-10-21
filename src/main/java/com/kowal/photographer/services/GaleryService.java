@@ -1,6 +1,6 @@
 package com.kowal.photographer.services;
 
-import com.kowal.photographer.entitys.Galery;
+import com.kowal.photographer.entities.Galery;
 import com.kowal.photographer.repositorys.GaleryRepository;
 import org.springframework.stereotype.Service;
 
@@ -8,9 +8,6 @@ import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Serwis zajmujący się obsługą galerii
- */
 @Service
 public class GaleryService {
     private final GaleryRepository galeryRepository;
@@ -32,7 +29,8 @@ public class GaleryService {
     }
 
     /**
-     * @return Wszystkie zdjęcia w galerii podzielone na 2 listy (na pół)
+     * Splits in half all items from galery to two lists.
+     * @return list containing two sub lists.
      */
     public List<List<Galery>> FindAllAndSplitInHalf(){
         List<List<Galery>> result = new ArrayList<>();

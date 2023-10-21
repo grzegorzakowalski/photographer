@@ -1,4 +1,4 @@
-package com.kowal.photographer.entitys;
+package com.kowal.photographer.entities;
 
 import lombok.Data;
 import lombok.ToString;
@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 /**
- * Encja przechowująca zgłoszone problemu przez użytkowników
+ * Entity holding user problem reports
  */
 @Entity
 @Table(name = "issues")

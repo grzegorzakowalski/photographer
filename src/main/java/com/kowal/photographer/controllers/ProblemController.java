@@ -1,6 +1,6 @@
 package com.kowal.photographer.controllers;
 
-import com.kowal.photographer.entitys.Issue;
+import com.kowal.photographer.entities.Issue;
 import com.kowal.photographer.repositorys.IssueRepository;
 import com.kowal.photographer.services.ConfigurationService;
 import org.springframework.stereotype.Controller;

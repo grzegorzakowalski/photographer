@@ -30,13 +30,10 @@ public class HomeController {
     @GetMapping("/page-settings")
     public String pageSettingsView(Model model){
         PageSettings pageSettings = configurationService.getPageSettings();
-        model.addAttribute("pageSettings", pageSettings);
         model.addAttribute("siteColor", pageSettings.getSiteColor());
+        pageSettings.setSiteColor(configurationService.getSiteColorAsName());
+        model.addAttribute("pageSettings", pageSettings);
         model.addAttribute("colorMap", configurationService.getColorMap());
-        model.addAttribute("actualColorName", configurationService.getColorMap().entrySet().stream()
-                .filter(entry -> pageSettings.getSiteColor().equals(entry.getValue()))
-                .findFirst()
-                .orElse( Map.entry("lipa","nie działa")).getKey());
         model.addAttribute("navIsActive","home");
         model.addAttribute("footerIsActive","aboutMe");
         return "page-settings";

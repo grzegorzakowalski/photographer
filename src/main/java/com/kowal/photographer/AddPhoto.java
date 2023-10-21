@@ -1,7 +1,7 @@
 package com.kowal.photographer;
 
-import com.kowal.photographer.entitys.Pictures;
-import com.kowal.photographer.entitys.Timetable;
+import com.kowal.photographer.entities.Pictures;
+import com.kowal.photographer.entities.Timetable;
 import lombok.Data;
 import lombok.ToString;
 

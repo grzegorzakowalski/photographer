@@ -1,11 +1,11 @@
-package com.kowal.photographer.entitys;
+package com.kowal.photographer.entities;
 
 import lombok.Data;
 
 import javax.persistence.*;
 
 /**
- * Encja trzymająca linki wraz z opisami do zdjęć z sesji zdjęciowych
+ * Entity holding links, and description of pictures done in session
  */
 @Entity
 @Data

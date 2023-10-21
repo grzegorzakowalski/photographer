@@ -1,4 +1,4 @@
-package com.kowal.photographer.entitys;
+package com.kowal.photographer.entities;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * Encja będąca konfiguracją całego projektu
+ * Entity holding configuration entries
  */
 @Entity
 @Data

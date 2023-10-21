@@ -23,13 +23,13 @@
                     <form:textarea path="aboutMe" cssClass="textarea has-fixed-size"/>
                 </div>
                 <br>
-                <div class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Wybierz kolor strony, aktualny: <strong>${actualColorName}</strong>
+                <div class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Wybierz kolor strony
                 </div>
                 <div class="control">
                     <div class="select is-rounded">
                         <form:select path="siteColor">
                             <c:forEach items="${colorMap}" var="color">
-                                <form:option value="${color.key}">${color.key}</form:option>
+                                <form:option  value="${color.key}"  >${color.key}</form:option>
                             </c:forEach>
                         </form:select>
                     </div>

@@ -2,8 +2,9 @@ package com.kowal.photographer.services;
 
 import java.time.LocalDate;
 
+
 /**
- * Serwis ułatwiający pracę z miesiącami
+ * Service for month operations
  */
 public class MonthService {
     private final LocalDate localDate;

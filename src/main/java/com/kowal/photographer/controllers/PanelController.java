@@ -1,6 +1,6 @@
 package com.kowal.photographer.controllers;
 
-import com.kowal.photographer.entitys.User;
+import com.kowal.photographer.entities.User;
 import com.kowal.photographer.repositorys.UserRepository;
 import com.kowal.photographer.security.CurrentUser;
 import com.kowal.photographer.services.ConfigurationService;
@@ -59,7 +59,7 @@ public class PanelController {
     public String userControlView(Model model){
         List<User> all = userRepository.findAll();
         model.addAttribute("navIsActive", "panel");
-        model.addAttribute("footerIsActive", "user-control");
+        model.addAttribute("footerIsActive", "userControl");
         model.addAttribute("siteColor",configurationService.getStringSiteColor());
         model.addAttribute("allUsers", all.stream()
                 .filter(user -> !user.getRole().equals("ROLE_TEMP"))

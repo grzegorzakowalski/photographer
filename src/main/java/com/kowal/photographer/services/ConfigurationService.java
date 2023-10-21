@@ -1,8 +1,9 @@
 package com.kowal.photographer.services;
 
 import com.kowal.photographer.PageSettings;
-import com.kowal.photographer.entitys.Configuration;
+import com.kowal.photographer.entities.Configuration;
 import com.kowal.photographer.repositorys.ConfigRepository;
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,7 @@ public class ConfigurationService {
     }
 
     /**
-     * Metoda tworząca galerie w wypadku kiedy jej nie ma
+     * Method creates configuration if there is none.
      */
     public void checkConfigurationIfEmptyCreate(){
         getMaxPerDay();
@@ -69,6 +70,13 @@ public class ConfigurationService {
 
     public String getStringSiteColor(){
         return getSiteColor().getValue();
+    }
+
+    public String getSiteColorAsName(){
+        String siteColor = getStringSiteColor();
+        return colorMap.entrySet().stream()
+                .filter( entry -> entry.getValue().equals(siteColor))
+                .findFirst().orElse(colorMap.entrySet().stream().findFirst().get()).getKey();
     }
 
     private Configuration getMaxPerDay(){
@@ -156,8 +164,10 @@ public class ConfigurationService {
     }
 
     /**
-     * Metoda zwracająca konfigurację w postaci obiektu klasy PageSettings.
+     * Method returns full configuration as PageSettings object.
+     * @return PageSettings object.
      */
+    @NotNull
     public PageSettings getPageSettings(){
         PageSettings pageSettings = new PageSettings();
         pageSettings.setAboutMe(getStringAboutMe());
@@ -168,13 +178,13 @@ public class ConfigurationService {
     }
 
     /**
-     * Metoda zapisująca ustawienia do bazy danych z obiektu klasy PageSettings.
-     * @param pageSettings
+     * Method saves settings to database from PageSettings object.
+     * @param pageSettings with configuration to save.
      */
     public void savePageSettings(PageSettings pageSettings){
-        setAboutMe(pageSettings.getAboutMe());
-        setSiteColor(pageSettings.getSiteColor());
-        setContactEmail(pageSettings.getContactEmail());
-        setContactPhoneNumber(pageSettings.getContactPhoneNumber());
+        setAboutMe(pageSettings.getAboutMe() == null ? getStringAboutMe() : pageSettings.getAboutMe());
+        setSiteColor(pageSettings.getSiteColor() == null ? getStringSiteColor() : pageSettings.getSiteColor());
+        setContactEmail(pageSettings.getContactEmail() == null ? getStringContactEmail() : pageSettings.getContactEmail());
+        setContactPhoneNumber(pageSettings.getContactPhoneNumber() == null ? getStringContactPhoneNumber() : pageSettings.getContactPhoneNumber());
     }
 }

@@ -1,11 +1,11 @@
-package com.kowal.photographer.entitys;
+package com.kowal.photographer.entities;
 
 import lombok.Data;
 
 import javax.persistence.*;
 
 /**
- * Encja będąca elementami galerii
+ * Entity holding which photos are used in galery
  */
 @Entity
 @Table(name = "galery")

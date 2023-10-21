@@ -1,4 +1,4 @@
-package com.kowal.photographer.entitys;
+package com.kowal.photographer.entities;
 
 import lombok.Data;
 import javax.persistence.*;
@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 /**
- * Encja przechowująca dane o planowanej/ zakończonej sesji zdjęciowej
+ * Entity holding data about planed/ done session
  */
 @Entity
 @Data
