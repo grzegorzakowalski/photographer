@@ -17,7 +17,6 @@ public class Timetable {
     private Long id;
     private LocalDate date;
     @ManyToOne
-    @Valid
     private User owner;
     private Boolean confirmed;
     private String hour;

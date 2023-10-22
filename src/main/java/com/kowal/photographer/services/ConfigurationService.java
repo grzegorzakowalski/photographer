@@ -17,17 +17,15 @@ import java.util.Map;
  */
 @Slf4j
 @Service
-@ToString
 public class ConfigurationService {
 
     private final ConfigRepository configRepository;
 
     @Getter
-    Map<String,String> colorMap;
+    private static final Map<String,String> colorMap = new HashMap<>();
 
     public ConfigurationService(ConfigRepository configRepository) {
         this.configRepository = configRepository;
-        colorMap = new HashMap<>();
         colorMap.put("red","is-danger");
         colorMap.put("yellow","is-warning");
         colorMap.put("green","is-success");

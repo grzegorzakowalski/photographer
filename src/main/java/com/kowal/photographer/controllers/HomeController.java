@@ -32,7 +32,7 @@ public class HomeController {
         model.addAttribute("siteColor", pageSettings.getSiteColor());
         pageSettings.setSiteColor(configurationService.getSiteColorAsName());
         model.addAttribute("pageSettings", pageSettings);
-        model.addAttribute("colorMap", configurationService.getColorMap());
+        model.addAttribute("colorMap", ConfigurationService.getColorMap());
         model.addAttribute("navIsActive","home");
         model.addAttribute("footerIsActive","aboutMe");
         return "page-settings";
@@ -42,6 +42,5 @@ public class HomeController {
     public String pageSettings(PageSettings pageSettings){
         configurationService.savePageSettings(pageSettings);
         return "redirect:/page-settings";
-
     }
 }
