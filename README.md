@@ -8,7 +8,7 @@ Simple site for booking appointments.
 
 ### General info
 
-Project was created 
+Project was created as final project. It was meant to help artist in setting up sessions. 
 
 ### Kontakt
 
