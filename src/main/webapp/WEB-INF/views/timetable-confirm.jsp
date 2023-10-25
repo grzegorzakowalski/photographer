@@ -43,6 +43,7 @@
                 <form:hidden path="id"/>
                 <form:hidden path="confirmed"/>
                 <form:hidden path="isDone"/>
+                <form:hidden path="firstName"/>
                 <button type="submit" class="button ${siteColor} is-inverted">Zatwierdź</button>
             </form:form>
             <form:form method="get" modelAttribute="timetable" action="/timetable/delete">
