@@ -16,10 +16,11 @@
   <c:import url="nav-bar.jsp"/>
   <div class="hero-body">
     <br>
+      <div class="container has-text-centered" >
 <section class="section is-medium">
   <h2 class="title">W razie wystąpienia jakiegoś problemu należy wypełnić formularz.</h2>
 </section>
-    <form:form method="post" modelAttribute="issue">
+    <form:form method="post" modelAttribute="issue" style="width: 25%" cssStyle="has-text-centered">
     <div class="field">
       <label class="label <c:if test="${!siteColor.equals('is-warning')}">has-text-light</c:if>">Podaj ogólne określenie problemu:</label>
       <div class="control">
@@ -38,7 +39,7 @@
       </p>
     </div>
     </form:form>
-
+      </div>
   </div>
   <c:import url="footer.jsp"/>
 </section>
