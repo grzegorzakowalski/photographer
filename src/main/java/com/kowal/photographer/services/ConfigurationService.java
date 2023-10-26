@@ -1,11 +1,10 @@
 package com.kowal.photographer.services;
 
-import com.kowal.photographer.PageSettings;
+import com.kowal.photographer.pojo.PageSettings;
 import com.kowal.photographer.entities.Configuration;
 import com.kowal.photographer.repositorys.ConfigRepository;
 import com.sun.istack.NotNull;
 import lombok.Getter;
-import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

@@ -1,19 +1,17 @@
 package com.kowal.photographer.security;
 
-import com.kowal.photographer.repositorys.UserRepository;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import java.util.Collection;
 
+@Getter
 public class CurrentUser extends User {
-    private final UserRepository userRepository;
-    @Getter
+
     private final com.kowal.photographer.entities.User user;
     public CurrentUser(String username, String password, Collection<? extends GrantedAuthority> authorities,
-                       UserRepository userRepository, com.kowal.photographer.entities.User user) {
+                       com.kowal.photographer.entities.User user) {
         super(username, password, authorities);
-        this.userRepository = userRepository;
         this.user = user;
     }
 }

@@ -1,7 +1,6 @@
-package com.kowal.photographer;
+package com.kowal.photographer.month.reprezentation;
 
 import lombok.Data;
-import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,6 @@ import java.util.List;
  * Class representing week of month.
  */
 @Data
-@ToString
 public class Week {
     private final List<Day> listOfDays;
 
@@ -19,11 +17,15 @@ public class Week {
      * @param firstDayNumber first day of a week as day of month number.
      * @param monthLength month length.
      */
-    public Week(Integer firstDayNumber, Integer monthLength){
+    private Week(Integer firstDayNumber, Integer monthLength){
         listOfDays = new ArrayList<>();
         for (int i = 1; i <= 7 && i + firstDayNumber <= monthLength; i++){
             listOfDays.add( new Day( i, firstDayNumber + i - 1));
         }
+    }
+
+    public static Week getNotFirstWeekOfMonth(Integer firstDayNumber, Integer monthLength){
+        return new Week(firstDayNumber, monthLength);
     }
 
 
@@ -35,10 +37,14 @@ public class Week {
      *                        monday is 1,
      *                        thursday is 4.
      */
-    public Week(Integer firstDayNumber, Integer monthLength, Integer dayOfWeekNumber){
+    private Week(Integer firstDayNumber, Integer monthLength, Integer dayOfWeekNumber){
         listOfDays = new ArrayList<>();
         for (int i = dayOfWeekNumber; i <= 7 && i <= monthLength; i++){
             listOfDays.add( new Day( i, firstDayNumber + i - 1));
         }
+    }
+
+    public static Week getFirstWeekOfMonth(Integer firstDayNumber, Integer monthLength, Integer dayOfWeekNumber){
+        return new Week(firstDayNumber, monthLength, dayOfWeekNumber);
     }
 }

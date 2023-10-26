@@ -1,7 +1,7 @@
 package com.kowal.photographer.controllers;
 
-import com.kowal.photographer.AddPhoto;
-import com.kowal.photographer.Month;
+import com.kowal.photographer.pojo.AddPhoto;
+import com.kowal.photographer.month.reprezentation.Month;
 import com.kowal.photographer.entities.Pictures;
 import com.kowal.photographer.entities.Timetable;
 import com.kowal.photographer.repositorys.PicturesRepository;

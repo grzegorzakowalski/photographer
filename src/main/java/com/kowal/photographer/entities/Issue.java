@@ -11,7 +11,6 @@ import javax.validation.constraints.NotBlank;
  */
 @Entity
 @Table(name = "issues")
-@ToString
 @Data
 public class Issue {
     @Id

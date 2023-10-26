@@ -1,4 +1,4 @@
-package com.kowal.photographer;
+package com.kowal.photographer.month.reprezentation;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,6 @@ import lombok.ToString;
  */
 @AllArgsConstructor
 @Data
-@ToString
 public class Day {
     /**
      * Weekday number

@@ -1,6 +1,6 @@
 package com.kowal.photographer.controllers;
 
-import com.kowal.photographer.PageSettings;
+import com.kowal.photographer.pojo.PageSettings;
 import com.kowal.photographer.services.ConfigurationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

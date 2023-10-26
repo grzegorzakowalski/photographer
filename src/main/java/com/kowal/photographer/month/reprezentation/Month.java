@@ -1,8 +1,7 @@
-package com.kowal.photographer;
+package com.kowal.photographer.month.reprezentation;
 
 import com.kowal.photographer.services.MonthService;
 import lombok.Data;
-import lombok.ToString;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
@@ -15,7 +14,6 @@ import java.util.Locale;
  * Class representing given month in a year.
  */
 @Data
-@ToString
 public class Month {
     private final List<Week> listOfWeeks;
     private final String name;
@@ -33,11 +31,11 @@ public class Month {
         MonthService monthService = new MonthService(localDate);
         firstDay = monthService.getFirstDayAsNumberOfWeekDay();
         length = monthService.getMonthLength();
-        listOfWeeks.add(new Week(1, length, firstDay));
+        listOfWeeks.add(Week.getFirstWeekOfMonth(1, length, firstDay));
         LocalDate end = localDate.plusMonths(1);
         localDate = localDate.plusDays(7 - firstDay);
         while(localDate.isBefore( end) && !localDate.isEqual(end.minusDays(1))){
-            listOfWeeks.add( new Week(localDate.getDayOfMonth(), length));
+            listOfWeeks.add( Week.getNotFirstWeekOfMonth(localDate.getDayOfMonth(), length));
             localDate = localDate.plusDays(7);
         }
     }

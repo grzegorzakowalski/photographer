@@ -2,7 +2,6 @@ package com.kowal.photographer.entities;
 
 import lombok.Data;
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 

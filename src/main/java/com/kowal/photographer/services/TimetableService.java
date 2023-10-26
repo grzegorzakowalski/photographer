@@ -1,6 +1,6 @@
 package com.kowal.photographer.services;
 
-import com.kowal.photographer.AddPhoto;
+import com.kowal.photographer.pojo.AddPhoto;
 import com.kowal.photographer.entities.Timetable;
 import com.kowal.photographer.entities.User;
 import com.kowal.photographer.repositorys.PicturesRepository;

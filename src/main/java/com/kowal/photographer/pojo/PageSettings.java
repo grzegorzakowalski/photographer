@@ -1,4 +1,4 @@
-package com.kowal.photographer;
+package com.kowal.photographer.pojo;
 
 import lombok.Data;
 
