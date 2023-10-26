@@ -21,16 +21,11 @@ public class ConfigurationService {
     private final ConfigRepository configRepository;
 
     @Getter
-    private static final Map<String,String> colorMap = new HashMap<>();
+    private final static Map<String, String> COLOR_MAP = Map.of("red", "is-danger",
+            "yellow","is-warning", "green","is-success","blue","is-info","darkBlue","is-link","darkGreen","is-primary");
 
     public ConfigurationService(ConfigRepository configRepository) {
         this.configRepository = configRepository;
-        colorMap.put("red","is-danger");
-        colorMap.put("yellow","is-warning");
-        colorMap.put("green","is-success");
-        colorMap.put("blue","is-info");
-        colorMap.put("darkBlue","is-link");
-        colorMap.put("darkGreen","is-primary");
     }
 
     /**
@@ -49,7 +44,7 @@ public class ConfigurationService {
         if( siteColor == null){
             siteColor = new Configuration();
             siteColor.setName("site_color");
-            siteColor.setValue(colorMap.get("blue"));
+            siteColor.setValue(COLOR_MAP.get("blue"));
             configRepository.save(siteColor);
         }
         return siteColor;
@@ -57,7 +52,7 @@ public class ConfigurationService {
 
     public void setSiteColor(String color){
         Configuration c = getSiteColor();
-        String colorFromMap = colorMap.get(color);
+        String colorFromMap = COLOR_MAP.get(color);
         if( colorFromMap == null){
             log.error("{} isn't correct color", color);
         } else {
@@ -72,9 +67,9 @@ public class ConfigurationService {
 
     public String getSiteColorAsName(){
         String siteColor = getStringSiteColor();
-        return colorMap.entrySet().stream()
+        return COLOR_MAP.entrySet().stream()
                 .filter( entry -> entry.getValue().equals(siteColor))
-                .findFirst().orElse(colorMap.entrySet().stream().findFirst().get()).getKey();
+                .findFirst().orElse(COLOR_MAP.entrySet().stream().findFirst().get()).getKey();
     }
 
     private Configuration getMaxPerDay(){
