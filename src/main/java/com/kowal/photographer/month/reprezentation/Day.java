@@ -2,7 +2,6 @@ package com.kowal.photographer.month.reprezentation;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.ToString;
 
 /**
  * Class that represents day of week

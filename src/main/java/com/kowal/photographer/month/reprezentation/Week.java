@@ -13,7 +13,7 @@ public class Week {
     private final List<Day> listOfDays;
 
     /**
-     * Constructor which creates, all bout first week of month.
+     * Creates all bout first week of month.
      * @param firstDayNumber first day of a week as day of month number.
      * @param monthLength month length.
      */
@@ -24,13 +24,19 @@ public class Week {
         }
     }
 
+    /**
+     * Returns ready week but not first.
+     * @param firstDayNumber first day of a week as day of month number.
+     * @param monthLength month length.
+     * @return object Week.
+     */
     public static Week getNotFirstWeekOfMonth(Integer firstDayNumber, Integer monthLength){
         return new Week(firstDayNumber, monthLength);
     }
 
 
     /**
-     * Constructor creating only first week of month.
+     * Creates only first week of month.
      * @param firstDayNumber first day of a week as day of month number.
      * @param monthLength month length.
      * @param dayOfWeekNumber number that represents which day of week is first day in this week. For example:
@@ -44,6 +50,14 @@ public class Week {
         }
     }
 
+    /**
+     * Returns only first week of month.
+     * @param firstDayNumber first day of a week as day of month number.
+     * @param monthLength month length.
+     * @param dayOfWeekNumber number that represents which day of week is first day in this week. For example:
+     *                        monday is 1,
+     *                        thursday is 4.
+     */
     public static Week getFirstWeekOfMonth(Integer firstDayNumber, Integer monthLength, Integer dayOfWeekNumber){
         return new Week(firstDayNumber, monthLength, dayOfWeekNumber);
     }

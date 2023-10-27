@@ -21,7 +21,7 @@ public class Month {
     private final Integer length;
 
     /**
-     * Constructor.
+     *
      * @param localDate object with month that is meant to be represented as.
      */
     public Month(LocalDate localDate){
