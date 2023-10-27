@@ -2,6 +2,7 @@ package com.kowal.photographer.services;
 
 import com.kowal.photographer.entities.Galery;
 import com.kowal.photographer.repositorys.GaleryRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -9,12 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class GaleryService {
     private final GaleryRepository galeryRepository;
 
-    public GaleryService(GaleryRepository galeryRepository) {
-        this.galeryRepository = galeryRepository;
-    }
 
     public void add(Galery galery){
         try {

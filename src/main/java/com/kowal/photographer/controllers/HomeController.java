@@ -2,6 +2,7 @@ package com.kowal.photographer.controllers;
 
 import com.kowal.photographer.pojo.PageSettings;
 import com.kowal.photographer.services.ConfigurationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,12 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
     private final ConfigurationService configurationService;
 
-    public HomeController(ConfigurationService configurationService) {
-        this.configurationService = configurationService;
-    }
 
     @GetMapping
     public String homePageView(Model model){
@@ -32,7 +31,7 @@ public class HomeController {
         model.addAttribute("siteColor", pageSettings.getSiteColor());
         pageSettings.setSiteColor(configurationService.getSiteColorAsName());
         model.addAttribute("pageSettings", pageSettings);
-        model.addAttribute("colorMap", ConfigurationService.getColorMap());
+        model.addAttribute("colorMap", ConfigurationService.getCOLOR_MAP());
         model.addAttribute("navIsActive","home");
         model.addAttribute("footerIsActive","aboutMe");
         return "page-settings";

@@ -5,6 +5,7 @@ import com.kowal.photographer.entities.Configuration;
 import com.kowal.photographer.repositorys.ConfigRepository;
 import com.sun.istack.NotNull;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.Map;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class ConfigurationService {
 
     private final ConfigRepository configRepository;
@@ -24,12 +26,9 @@ public class ConfigurationService {
     private final static Map<String, String> COLOR_MAP = Map.of("red", "is-danger",
             "yellow","is-warning", "green","is-success","blue","is-info","darkBlue","is-link","darkGreen","is-primary");
 
-    public ConfigurationService(ConfigRepository configRepository) {
-        this.configRepository = configRepository;
-    }
 
     /**
-     * Method creates configuration if there is none.
+     * Creates configuration if there is none.
      */
     public void checkConfigurationIfEmptyCreate(){
         getMaxPerDay();
@@ -178,7 +177,7 @@ public class ConfigurationService {
     }
 
     /**
-     * Method returns full configuration as PageSettings object.
+     * Returns full configuration as PageSettings object.
      * @return PageSettings object.
      */
     @NotNull
@@ -193,7 +192,7 @@ public class ConfigurationService {
     }
 
     /**
-     * Method saves settings to database from PageSettings object.
+     * Saves settings to database from PageSettings object.
      * @param pageSettings with configuration to save.
      */
     public void savePageSettings(PageSettings pageSettings){

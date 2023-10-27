@@ -3,6 +3,7 @@ package com.kowal.photographer.controllers;
 import com.kowal.photographer.entities.User;
 import com.kowal.photographer.repositorys.UserRepository;
 import com.kowal.photographer.services.ConfigurationService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,18 +17,12 @@ import java.util.Set;
 
 @Controller
 @Slf4j
+@RequiredArgsConstructor
 public class RegistrationController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final Validator validator;
     private final ConfigurationService configurationService;
-
-    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder, Validator validator, ConfigurationService configurationService) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.validator = validator;
-        this.configurationService = configurationService;
-    }
 
     @GetMapping("/registry")
     public String registrationView(Model model){

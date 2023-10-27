@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * Klasa, która przetrzymuje encje Timetable i Pictures.
+ * Class which holds timetable and pictures entities
  */
 @Data
 public class AddPhoto {

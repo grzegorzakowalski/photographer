@@ -3,23 +3,20 @@ package com.kowal.photographer.services;
 import com.kowal.photographer.entities.Pictures;
 import com.kowal.photographer.entities.User;
 import com.kowal.photographer.repositorys.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
-        this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
-    }
-
     /**
-     * Method returns temp user to farther link with timetable.
+     * Returns temp user to farther link with timetable.
      * @return user who is almost ready to save just needs phone number and email to be set.
      */
     public User getTempUser(){

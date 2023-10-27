@@ -6,6 +6,7 @@ import com.kowal.photographer.entities.User;
 import com.kowal.photographer.repositorys.PicturesRepository;
 import com.kowal.photographer.repositorys.TimetableRepository;
 import com.kowal.photographer.repositorys.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,20 +18,13 @@ import java.util.List;
  * Service operating on timetable
  */
 @Service
+@RequiredArgsConstructor
 public class TimetableService {
     private final TimetableRepository timetableRepository;
     private final UserRepository userRepository;
     private final UserService userService;
     private final PicturesRepository picturesRepository;
     private final ConfigurationService configurationService;
-
-    public TimetableService(TimetableRepository timetableRepository, UserRepository userRepository, UserService userService, PicturesRepository picturesRepository, ConfigurationService configurationService) {
-        this.timetableRepository = timetableRepository;
-        this.userRepository = userRepository;
-        this.userService = userService;
-        this.picturesRepository = picturesRepository;
-        this.configurationService = configurationService;
-    }
 
     /**
      * Add timetable to db. It only adds, can't update.
@@ -49,7 +43,7 @@ public class TimetableService {
     }
 
     /**
-     * Method sets up list of bool for days of given month, where true means that day is full, and you can't book more meetings.
+     * Sets up list of bool for days of given month, where true means that day is full, and you can't book more meetings.
      * @param localDate param with month you want to operate.
      * @return Boolean list where true means day is full
      */
@@ -68,7 +62,7 @@ public class TimetableService {
     }
 
     /**
-     * Method returns list of timetables that are still to go. Whither it is confirmed or not.
+     * Returns list of timetables that are still to go. Whither it is confirmed or not.
      * @param isConfirmed  is session confirmed by photographer or no.
      * @return list of timetables that meet circumstances.
      */
@@ -80,7 +74,7 @@ public class TimetableService {
                 .toList();
     }
 
-    /** Method adds pictures to timetable using AddPhoto object. Object from this class contains proper saved timetable entity, and new photo entity which doesn't matter is it saved or not.
+    /** Adds pictures to timetable using AddPhoto object. Object from this class contains proper saved timetable entity, and new photo entity which doesn't matter is it saved or not.
      *
      * @param addPhoto object containing two entities: timetable, and pictures.
      */

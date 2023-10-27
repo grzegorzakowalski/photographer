@@ -4,6 +4,7 @@ import com.kowal.photographer.entities.User;
 import com.kowal.photographer.repositorys.UserRepository;
 import com.kowal.photographer.security.CurrentUser;
 import com.kowal.photographer.services.ConfigurationService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,17 +24,13 @@ import java.util.Set;
 @Controller
 @RequestMapping("/panel")
 @Slf4j
+@RequiredArgsConstructor
 public class PanelController {
     private final ConfigurationService configurationService;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final Validator validator;
-    public PanelController(ConfigurationService configurationService, PasswordEncoder passwordEncoder, UserRepository userRepository, Validator validator) {
-        this.configurationService = configurationService;
-        this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
-        this.validator = validator;
-    }
+
 
     @GetMapping
     public String getPanelView(@AuthenticationPrincipal CurrentUser currentUser,

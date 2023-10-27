@@ -4,13 +4,12 @@ import com.kowal.photographer.pojo.AddPhoto;
 import com.kowal.photographer.month.reprezentation.Month;
 import com.kowal.photographer.entities.Pictures;
 import com.kowal.photographer.entities.Timetable;
-import com.kowal.photographer.repositorys.PicturesRepository;
 import com.kowal.photographer.repositorys.TimetableRepository;
-import com.kowal.photographer.repositorys.UserRepository;
 import com.kowal.photographer.security.CurrentUser;
 import com.kowal.photographer.services.ConfigurationService;
 import com.kowal.photographer.services.TimetableService;
 import com.kowal.photographer.services.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -29,20 +28,13 @@ import java.util.Set;
 @Controller
 @RequestMapping("/timetable")
 @Slf4j
+@RequiredArgsConstructor
 public class TimetableController {
     private final TimetableService timetableService;
     private final UserService userService;
     private final Validator validator;
     private final ConfigurationService configurationService;
     private final TimetableRepository timetableRepository;
-
-    public TimetableController(TimetableService timetableService, UserService userService, TimetableRepository timetableRepository, Validator validator, ConfigurationService configurationService, UserRepository userRepository, PicturesRepository picturesRepository) {
-        this.timetableService = timetableService;
-        this.userService = userService;
-        this.configurationService = configurationService;
-        this.timetableRepository = timetableRepository;
-        this.validator = validator;
-    }
 
     @GetMapping
     public String timetableView(Model model, @RequestParam(name = "shift", defaultValue = "0") Integer shift){
