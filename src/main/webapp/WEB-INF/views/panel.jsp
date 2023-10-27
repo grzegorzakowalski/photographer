@@ -13,7 +13,7 @@
 <body>
 <section class="hero ${siteColor} is-fullheight">
     <c:import url="nav-bar.jsp"/>
-    <div class="hero-body">
+    <div class="hero-body has-text-centered">
         <div class="container is-fluid">
             <section class="section">
                 <h1 class="title">Witaj ${user.firstName}!</h1>
@@ -23,7 +23,7 @@
             </section>
             <c:if test="${user.pictures.size() > 0}">
                 <section class="section">
-                    <h1 class="title">Oto lista twoich sesji:</h1>
+                    <h1 class="title">Oto lista twoich zdjęć:</h1>
                     <h2 class="subtitle">
                         <c:forEach items="${user.pictures}" var="pic">
                                 <a href="${pic.link}">${pic.description}</a><br>
@@ -33,12 +33,35 @@
             </c:if>
             <c:if test="${user.pictures.size() == 0}">
                 <section class="section">
-                    <h1 class="title">Nie masz na razie żadnych zdjęć</h1>
+                    <h1 class="title">Nie masz na razie żadnych zdjęć.</h1>
+                    <br>
                     <h2 class="subtitle">
                         Jednak zawsze możemy to zmienić! <a href="${pageContext.request.contextPath}/timetable">Tutaj</a>, albo poprzez <a href="${pageContext.request.contextPath}/contact">kontakt</a>.
                     </h2>
                 </section>
             </c:if>
+            <section class="section">
+                <h1 class="title">Lista twoich potwierdzonych sesji:</h1>
+                <br>
+                <h2 class="subtitle">
+                    <c:if test="${timetableConfirmed.size() == 0}">Niestety nie ma żadnej.</c:if>
+                    <c:forEach items="${timetableConfirmed}" var="tt">
+                        ${tt.date} : ${tt.hour}<br>
+                        <a href="${pageContext.request.contextPath}/timetable/view?id=${tt.id}">${tt.description}</a><br><br>
+                    </c:forEach>
+                </h2>
+            </section>
+            <section class="section">
+                <h1 class="title">Lista twoich niepotwierdzonych sesji:</h1>
+                <br>
+                <h2 class="subtitle">
+                    <c:if test="${timetableNotConfirmed.size() == 0}">Nie ma żadnej.</c:if>
+                    <c:forEach items="${timetableNotConfirmed}" var="tt">
+                        ${tt.date} : ${tt.hour}<br>
+                        <a href="${pageContext.request.contextPath}/timetable/view?id=${tt.id}">${tt.description}</a><br><br>
+                    </c:forEach>
+                </h2>
+            </section>
             <br>
             <br>
             <form method="post">

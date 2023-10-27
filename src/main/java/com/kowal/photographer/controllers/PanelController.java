@@ -1,19 +1,18 @@
 package com.kowal.photographer.controllers;
 
 import com.kowal.photographer.entities.User;
+import com.kowal.photographer.repositorys.TimetableRepository;
 import com.kowal.photographer.repositorys.UserRepository;
 import com.kowal.photographer.security.CurrentUser;
 import com.kowal.photographer.services.ConfigurationService;
+import com.kowal.photographer.services.TimetableService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -30,16 +29,20 @@ public class PanelController {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final Validator validator;
+    private final TimetableService timetableService;
 
+    @ModelAttribute
+    public void addCommonAttributes(Model model){
+        model.addAttribute("navIsActive", "panel");
+    }
 
     @GetMapping
     public String getPanelView(@AuthenticationPrincipal CurrentUser currentUser,
                                Model model){
-        model.addAttribute("siteColor",configurationService.getStringSiteColor());
         model.addAttribute("user", currentUser.getUser());
-        model.addAttribute("navIsActive", "panel");
         model.addAttribute("footerIsActive", "panel");
-        // dodaj wyświetlanie twoich terminów
+        model.addAttribute("timetableConfirmed", timetableService.getUsersTimetablesByConfirmed(currentUser.getUser(), true));
+        model.addAttribute("timetableNotConfirmed", timetableService.getUsersTimetablesByConfirmed(currentUser.getUser(), false));
         return "panel";
     }
 
@@ -55,9 +58,7 @@ public class PanelController {
     @GetMapping("/user-control")
     public String userControlView(Model model){
         List<User> all = userRepository.findAll();
-        model.addAttribute("navIsActive", "panel");
         model.addAttribute("footerIsActive", "userControl");
-        model.addAttribute("siteColor",configurationService.getStringSiteColor());
         model.addAttribute("allUsers", all.stream()
                 .filter(user -> !user.getRole().equals("ROLE_TEMP"))
                 .sorted(Comparator.comparing(User::getRole))
@@ -72,9 +73,7 @@ public class PanelController {
         if( id == null){
             return "redirect:/panel/user-control";
         }
-        model.addAttribute("navIsActive", "panel");
         model.addAttribute("footerIsActive", "user-control");
-        model.addAttribute("siteColor",configurationService.getStringSiteColor());
         model.addAttribute("user", userRepository.findById(id).orElse(null));
         model.addAttribute("error", error);
         return "panel-change-user";
@@ -96,9 +95,7 @@ public class PanelController {
     @GetMapping("/new-user")
     public String addNewUser(Model model,
                              @RequestParam(name = "error", required = false) String error){
-        model.addAttribute("navIsActive", "panel");
         model.addAttribute("footerIsActive", "user-control");
-        model.addAttribute("siteColor",configurationService.getStringSiteColor());
         model.addAttribute("error", error);
         model.addAttribute("user", new User());
         return "panel-new-user";
@@ -120,4 +117,5 @@ public class PanelController {
         userRepository.delete(userRepository.findById(id).orElse(new User()));
         return "redirect:/panel/user-control";
     }
+
 }

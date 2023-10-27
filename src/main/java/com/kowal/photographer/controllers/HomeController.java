@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -13,14 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class HomeController {
     private final ConfigurationService configurationService;
-
+    @ModelAttribute
+    public void addCommonAttributes(Model model){
+        model.addAttribute("navIsActive","home");
+    }
 
     @GetMapping
     public String homePageView(Model model){
         configurationService.checkConfigurationIfEmptyCreate();
         model.addAttribute("aboutMe",configurationService.getStringAboutMe());
-        model.addAttribute("siteColor",configurationService.getStringSiteColor());
-        model.addAttribute("navIsActive","home");
         model.addAttribute("footerIsActive","home");
         return "home";
     }
@@ -28,11 +30,9 @@ public class HomeController {
     @GetMapping("/page-settings")
     public String pageSettingsView(Model model){
         PageSettings pageSettings = configurationService.getPageSettings();
-        model.addAttribute("siteColor", pageSettings.getSiteColor());
         pageSettings.setSiteColor(configurationService.getSiteColorAsName());
         model.addAttribute("pageSettings", pageSettings);
         model.addAttribute("colorMap", ConfigurationService.getCOLOR_MAP());
-        model.addAttribute("navIsActive","home");
         model.addAttribute("footerIsActive","aboutMe");
         return "page-settings";
     }

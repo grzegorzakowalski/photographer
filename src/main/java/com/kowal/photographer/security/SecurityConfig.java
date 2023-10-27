@@ -16,7 +16,7 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception{
         return http.authorizeHttpRequests()
-                .antMatchers("/panel").hasAnyRole("USER","ADMIN")
+                .antMatchers("/panel", "/timetable/view").hasAnyRole("USER","ADMIN")
                 .antMatchers("/timetable/confirm",
                         "/panel/*",
                         "/timetable/delete",

@@ -9,6 +9,7 @@ import com.kowal.photographer.repositorys.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -89,6 +90,22 @@ public class TimetableService {
         addPhoto.getTimetable().getOwner().getPictures().add(addPhoto.getPictures());
         userRepository.save(addPhoto.getTimetable().getOwner());
         timetableRepository.save(addPhoto.getTimetable());
+    }
+
+    /**
+     * Returns list of timetables by attribute confirmed, that will occur in the future.
+     * @param user by which you search timetables.
+     * @param confirmed is timetable confirmed by admin or not.
+     * @return list of timetables which fits params.
+     */
+    public List<Timetable> getUsersTimetablesByConfirmed(User user, boolean confirmed){
+        return timetableRepository.findAllByOwner(user).stream().filter( tt -> tt.getConfirmed() == confirmed)
+                .filter(tt -> tt.getDate().isAfter(LocalDate.now()))
+                .toList();
+    }
+
+    public Timetable findById(Long id){
+        return timetableRepository.findById(id).orElse( Timetable.builder().id(-1L).build());
     }
 
 }

@@ -15,7 +15,6 @@ public class ContactController {
 
     @GetMapping
     public String contactView(Model model){
-        model.addAttribute("siteColor",configurationService.getStringSiteColor());
         model.addAttribute("navIsActive","timetable");
         model.addAttribute("footerIsActive","contact");
         model.addAttribute("pageSettings", configurationService.getPageSettings());

@@ -27,7 +27,6 @@ public class RegistrationController {
     @GetMapping("/registry")
     public String registrationView(Model model){
         model.addAttribute("user", new User());
-        model.addAttribute("siteColor", configurationService.getStringSiteColor());
         return "registration";
     }
 

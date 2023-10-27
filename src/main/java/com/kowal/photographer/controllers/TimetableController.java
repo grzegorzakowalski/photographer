@@ -14,10 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -36,10 +33,13 @@ public class TimetableController {
     private final ConfigurationService configurationService;
     private final TimetableRepository timetableRepository;
 
+    @ModelAttribute
+    public void addCommonAttributes(Model model){
+        model.addAttribute("navIsActive","timetable");
+    }
+
     @GetMapping
     public String timetableView(Model model, @RequestParam(name = "shift", defaultValue = "0") Integer shift){
-        model.addAttribute("siteColor",configurationService.getStringSiteColor());
-        model.addAttribute("navIsActive","timetable");
         model.addAttribute("footerIsActive","timetable");
         LocalDate actualDate = LocalDate.now().plusMonths(shift);
         Month month = new Month(actualDate);
@@ -57,8 +57,6 @@ public class TimetableController {
                                    @RequestParam(name = "month", defaultValue = "1") Integer month,
                                    @RequestParam(name = "year", defaultValue = "2023") Integer year,
                                    @AuthenticationPrincipal CurrentUser currentUser){
-        model.addAttribute("siteColor",configurationService.getStringSiteColor());
-        model.addAttribute("navIsActive","timetable");
         model.addAttribute("footerIsActive","timetable");
         Timetable timetable = new Timetable();
         timetable.setOwner( currentUser != null ? currentUser.getUser() : userService.getTempUser());
@@ -85,8 +83,6 @@ public class TimetableController {
     @GetMapping("/confirm")
     public String timetableConfirmByAdminView( @RequestParam(name = "id") Long id, Model model){
         Optional<Timetable> byId = timetableRepository.findById(id);
-        model.addAttribute("siteColor",configurationService.getStringSiteColor());
-        model.addAttribute("navIsActive","timetable");
         model.addAttribute("footerIsActive","timetableList");
         if(byId.isEmpty()){
             return "/panel";
@@ -111,8 +107,6 @@ public class TimetableController {
     @GetMapping("/delete")
     public String deleteConfirmation(@RequestParam("id") long id, Model model){
         Optional<Timetable> optional = timetableRepository.findById(id);
-        model.addAttribute("siteColor",configurationService.getStringSiteColor());
-        model.addAttribute("navIsActive","timetable");
         model.addAttribute("footerIsActive","timetableList");
         if(optional.isPresent()) {
             model.addAttribute("timetable", optional.get());
@@ -130,8 +124,6 @@ public class TimetableController {
     @GetMapping("/list")
     public String timetableList(Model model,
                                 @RequestParam(name = "msg", required = false)String msg){
-        model.addAttribute("siteColor",configurationService.getStringSiteColor());
-        model.addAttribute("navIsActive","timetable");
         model.addAttribute("footerIsActive","timetableList");
         model.addAttribute("allNotConfirmed", timetableService.getNotDoneListByConfirmed(false));
         model.addAttribute("allConfirmed", timetableService.getNotDoneListByConfirmed(true));
@@ -149,12 +141,10 @@ public class TimetableController {
     @GetMapping("/add-photo")
     public String addPhotoView(Model model,
                                @RequestParam(name = "id") Long id){
-        model.addAttribute("siteColor",configurationService.getStringSiteColor());
-        model.addAttribute("navIsActive","timetable");
         model.addAttribute("footerIsActive","timetableList");
         Timetable optional = timetableRepository.findById(id).orElse(null);
         if( optional == null){
-            log.error("Pojawił się w widoku timetalbe/list wpis który nie istnieje");
+            log.error("Pojawił się w widoku timetable/list wpis który nie istnieje");
             return "redirect:timetable/list";
         }
         AddPhoto addPhoto = new AddPhoto();
@@ -168,5 +158,12 @@ public class TimetableController {
     public String addPhoto(AddPhoto addPhoto){
         timetableService.addPhoto(addPhoto);
         return "redirect:/timetable/list";
+    }
+
+    @GetMapping("/view")
+    public String timetableView(Model model, @RequestParam(name = "id") Long id){
+        model.addAttribute("timetable", timetableService.findById(id));
+        model.addAttribute("footerIsActive","timetableList");
+        return "timetable-view";
     }
 }
