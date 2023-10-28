@@ -1,6 +1,9 @@
 package com.kowal.photographer.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -10,6 +13,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "galery")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Galery {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)

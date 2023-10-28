@@ -34,8 +34,13 @@ public class GaleryService {
     public List<List<Galery>> FindAllAndSplitInHalf(){
         List<List<Galery>> result = new ArrayList<>();
         List<Galery> all = findAll();
-        result.add( all.subList(0, all.size() / 2 ));
-        result.add( all.subList(all.size() / 2, all.size() ));
+        if( all.size() % 2 == 0) {
+            result.add(all.subList(0, all.size() / 2));
+            result.add(all.subList(all.size() / 2, all.size()));
+        } else{
+            result.add(all.subList(0, all.size() / 2 + 1));
+            result.add(all.subList(all.size() / 2 + 1, all.size()));
+        }
         return result;
     }
 }
