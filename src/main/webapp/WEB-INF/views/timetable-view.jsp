@@ -14,12 +14,19 @@
     <c:import url="nav-bar.jsp"/>
     <div class="hero-body has-text-centered">
         <div class="container is-fluid">
-            <section class="section">
-                <h1 class="title">${timetable.date} : ${timetable.hour}</h1>
-                <h2 class="subtitle">
-                    ${timetable.description}
-                </h2>
-            </section>
+            <c:if test="${timetable.id > -1}">
+                <section class="section">
+                    <h1 class="title">${timetable.date} : ${timetable.hour}</h1>
+                    <h2 class="subtitle">
+                        ${timetable.description}
+                    </h2>
+                </section>
+            </c:if>
+            <c:if test="${timetable.id == -1}">
+                <section class="section">
+                    <h1 class="title">Coś poszło nie tak</h1>
+                </section>
+            </c:if>
         </div>
     </div>
     <c:import url="footer.jsp"/>
