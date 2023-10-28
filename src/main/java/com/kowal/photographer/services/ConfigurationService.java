@@ -34,6 +34,7 @@ public class ConfigurationService {
         getMaxPerDay();
         getSiteColor();
         getAboutMe();
+        getContactEmail();
         getContactPhoneNumber();
         getContactHours();
     }
@@ -183,6 +184,7 @@ public class ConfigurationService {
     @NotNull
     public PageSettings getPageSettings(){
         PageSettings pageSettings = new PageSettings();
+        pageSettings.setMaxPerDay(getIntegerMaxPerDay().toString());
         pageSettings.setAboutMe(getStringAboutMe());
         pageSettings.setSiteColor(getStringSiteColor());
         pageSettings.setContactEmail(getStringContactEmail());
@@ -196,6 +198,7 @@ public class ConfigurationService {
      * @param pageSettings with configuration to save.
      */
     public void savePageSettings(PageSettings pageSettings){
+        setMaxPerDay(pageSettings.getMaxPerDay() == null ? getIntegerMaxPerDay().toString() : pageSettings.getMaxPerDay());
         setAboutMe(pageSettings.getAboutMe() == null ? getStringAboutMe() : pageSettings.getAboutMe());
         setSiteColor(pageSettings.getSiteColor() == null ? getStringSiteColor() : pageSettings.getSiteColor());
         setContactEmail(pageSettings.getContactEmail() == null ? getStringContactEmail() : pageSettings.getContactEmail());
