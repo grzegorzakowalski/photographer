@@ -1,9 +1,7 @@
 package com.kowal.photographer.services;
 
 import com.kowal.photographer.entities.Timetable;
-import com.kowal.photographer.repositorys.PicturesRepository;
 import com.kowal.photographer.repositorys.TimetableRepository;
-import com.kowal.photographer.repositorys.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

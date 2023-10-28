@@ -35,6 +35,9 @@ public class UserService {
      */
     public List<User> getAdminListWithoutPicture(Pictures picture){
         List<User> roleAdmin = userRepository.findAllByRole("ROLE_ADMIN");
+        if( picture == null){
+            return roleAdmin;
+        }
         return roleAdmin.stream()
                 .filter(admin -> !admin.getPictures().contains(picture))
                 .toList();
