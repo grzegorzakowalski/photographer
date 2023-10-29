@@ -1,11 +1,10 @@
 package com.kowal.photographer.controllers;
 
 import com.kowal.photographer.entities.User;
-import com.kowal.photographer.repositorys.TimetableRepository;
 import com.kowal.photographer.repositorys.UserRepository;
 import com.kowal.photographer.security.CurrentUser;
-import com.kowal.photographer.services.ConfigurationService;
 import com.kowal.photographer.services.TimetableService;
+import com.kowal.photographer.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -25,7 +24,7 @@ import java.util.Set;
 @Slf4j
 @RequiredArgsConstructor
 public class PanelController {
-    private final ConfigurationService configurationService;
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final Validator validator;
@@ -114,7 +113,7 @@ public class PanelController {
 
     @PostMapping("/delete-user")
     public String deleteUser(Long id){
-        userRepository.delete(userRepository.findById(id).orElse(new User()));
+        userService.removeUserById(id);
         return "redirect:/panel/user-control";
     }
 

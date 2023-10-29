@@ -42,4 +42,16 @@ public class UserService {
                 .filter(admin -> !admin.getPictures().contains(picture))
                 .toList();
     }
+
+    /**
+     * Removes user from active list but doesn't delete him from database.
+     * @param id id of user to remove.
+     */
+    public void removeUserById(long id){
+        User user = userRepository.findById(id).orElse(null);
+        if( user != null ) {
+            user.setActive(false);
+            userRepository.save(user);
+        }
+    }
 }

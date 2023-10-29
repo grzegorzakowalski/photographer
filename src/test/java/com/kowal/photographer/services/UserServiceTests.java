@@ -38,4 +38,9 @@ public class UserServiceTests {
         Mockito.when(mockUserRepository.findAllByRole("ROLE_ADMIN")).thenReturn(List.of(User.builder().role("ROLE_ADMIN").build()));
         assertEquals(1, userService.getAdminListWithoutPicture(null).size());
     }
+
+    @Test
+    public void whenWrongId_ShouldDoNothing(){
+        userService.removeUserById(-1);
+    }
 }
